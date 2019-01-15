@@ -1,22 +1,56 @@
 import React, { Component } from 'react';
-import './app.css';
-import ReactImage from './react.png';
+import MapGL from 'react-map-gl';
+
+const MAPBOX_TOKEN = 'pk.eyJ1IjoiamVzc2llemgiLCJhIjoiY2pxeG5yNHhqMDBuZzN4cHA4ZGNwY2l3OCJ9.T2B6-B6EMW6u9XmjO4pNKw';
 
 export default class App extends Component {
-  state = { username: null };
+  state = {
+    style: 'mapbox://styles/mapbox/dark-v9',
+    viewport: {
+      width: window.innerWidth,
+      height: window.innerHeight,
+      longitude: 18.0686,
+      latitude: 59.3293,
+      zoom: 12,
+      maxZoom: 16
+    }
+  }
 
   componentDidMount() {
-    fetch('/api/getUsername')
-      .then(res => res.json())
-      .then(user => this.setState({ username: user.username }));
+    window.addEventListener('resize', this._resize);
+    this._resize();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._resize);
+  }
+
+  onStyleChange = (style) => {
+    this.setState({ style });
+  }
+
+  _onViewportChange = (viewport) => {
+    this.setState({
+      viewport: { ...this.state.viewport, ...viewport }
+    });
+  }
+
+  _resize = () => {
+    this._onViewportChange({
+      width: window.innerWidth,
+      height: window.innerHeight
+    });
   }
 
   render() {
-    const { username } = this.state;
     return (
       <div>
-        {username ? <h1>{`Hello ${username}`}</h1> : <h1>Loading.. please wait!</h1>}
-        <img src={ReactImage} alt="react" />
+        <MapGL
+          {...this.state.viewport}
+          mapStyle={this.state.style}
+          mapboxApiAccessToken={MAPBOX_TOKEN}
+          onViewportChange={viewport => this._onViewportChange(viewport)}
+        />
       </div>
     );
   }
