@@ -1,6 +1,7 @@
 {
-  "name": "simple-react-full-stack",
+  "name": "thesis_vis",
   "version": "1.0.0",
+  "license": "MIT",
   "description": "Boilerplate to build a full stack web application using React, Node.js, Express and Webpack.",
   "main": "src/server/index.js",
   "scripts": {
@@ -10,10 +11,10 @@
     "server": "nodemon src/server/index.js",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
-  "author": "Sandeep Raveesh",
-  "license": "ISC",
+  "author": "Jiaqi Zheng",
   "dependencies": {
     "babel-polyfill": "^6.26.0",
+    "deck.gl": "^6.3.4",
     "express": "^4.16.3",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
