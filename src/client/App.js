@@ -3,16 +3,10 @@ import React, { Component } from 'react';
 import { StaticMap } from 'react-map-gl';
 import DeckGL, { PolygonLayer } from 'deck.gl';
 import { TripsLayer } from '@deck.gl/experimental-layers';
+import DataBuildings from './data/buildings.json';
+import DataTrips from './data/trips.json';
 
 const MAPBOX_TOKEN = 'pk.eyJ1IjoiamVzc2llemgiLCJhIjoiY2pxeG5yNHhqMDBuZzN4cHA4ZGNwY2l3OCJ9.T2B6-B6EMW6u9XmjO4pNKw';
-
-// Source data CSV
-const DATA_URL = {
-  BUILDINGS:
-    'https://raw.githubusercontent.com/uber-common/deck.gl-data/master/examples/trips/buildings.json', // eslint-disable-line
-  TRIPS:
-    'https://raw.githubusercontent.com/uber-common/deck.gl-data/master/examples/trips/trips.json' // eslint-disable-line
-};
 
 const LIGHT_SETTINGS = {
   lightsPosition: [-74.05, 40.7, 8000, -73.5, 41, 5000],
@@ -66,12 +60,12 @@ export default class App extends Component {
   }
 
   _renderLayers() {
-    const {buildings = DATA_URL.BUILDINGS, trips = DATA_URL.TRIPS, trailLength = 180} = this.props;
+    const {trailLength = 180} = this.props;
 
     return [
       new TripsLayer({
         id: 'trips',
-        data: trips,
+        data: DataTrips,
         getPath: d => d.segments,
         getColor: d => (d.vendor === 0 ? [253, 128, 93] : [23, 184, 190]),
         opacity: 0.3,
@@ -81,7 +75,7 @@ export default class App extends Component {
       }),
       new PolygonLayer({
         id: 'buildings',
-        data: buildings,
+        data: DataBuildings,
         extruded: true,
         wireframe: false,
         fp64: true,
