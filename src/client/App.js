@@ -8,6 +8,9 @@ import DataTrips from './data/trips.json';
 
 const MAPBOX_TOKEN = 'pk.eyJ1IjoiamVzc2llemgiLCJhIjoiY2pxeG5yNHhqMDBuZzN4cHA4ZGNwY2l3OCJ9.T2B6-B6EMW6u9XmjO4pNKw';
 
+// drag right mouse for orbit view
+document.addEventListener('contextmenu', evt => evt.preventDefault());
+
 const LIGHT_SETTINGS = {
   lightsPosition: [-74.05, 40.7, 8000, -73.5, 41, 5000],
   ambientRatio: 0.05,
