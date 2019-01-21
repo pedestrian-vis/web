@@ -8,7 +8,7 @@ import DataTrips from './data/trips.json';
 
 const MAPBOX_TOKEN = 'pk.eyJ1IjoiamVzc2llemgiLCJhIjoiY2pxeG5yNHhqMDBuZzN4cHA4ZGNwY2l3OCJ9.T2B6-B6EMW6u9XmjO4pNKw';
 
-// drag right mouse for orbit view
+/* global window */
 document.addEventListener('contextmenu', evt => evt.preventDefault());
 
 const LIGHT_SETTINGS = {
@@ -20,14 +20,24 @@ const LIGHT_SETTINGS = {
   numberOfLights: 2
 };
 
+/* Kungsgatan view */
 export const INITIAL_VIEW_STATE = {
-  longitude: -74,
-  latitude: 40.72,
-  zoom: 14,
-  maxZoom: 16,
-  pitch: 45,
+  longitude: 18.0616,
+  latitude: 59.3343,
+  zoom: 14.5,
+  maxZoom: 17,
   bearing: 0
 };
+
+/* New York view for uber example */
+// export const INITIAL_VIEW_STATE = {
+//   longitude: -74,
+//   latitude: 40.72,
+//   zoom: 14,
+//   maxZoom: 16,
+//   pitch: 45,
+//   bearing: 0
+// };
 
 export default class App extends Component {
 
