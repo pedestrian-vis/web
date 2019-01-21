@@ -3,16 +3,21 @@ import React, { Component } from 'react';
 import { StaticMap } from 'react-map-gl';
 import DeckGL, { PolygonLayer } from 'deck.gl';
 import { TripsLayer } from '@deck.gl/experimental-layers';
-import DataBuildings from './data/buildings.json';
-import DataTrips from './data/trips.json';
 
 const MAPBOX_TOKEN = 'pk.eyJ1IjoiamVzc2llemgiLCJhIjoiY2pxeG5yNHhqMDBuZzN4cHA4ZGNwY2l3OCJ9.T2B6-B6EMW6u9XmjO4pNKw';
 
-/* global window */
+const DATA_URL = {
+  BUILDINGS:
+    'https://raw.githubusercontent.com/Jessie1201/traffic_visualization/master/src/client/data/buildings.json', // eslint-disable-line
+  TRIPS:
+    'https://raw.githubusercontent.com/Jessie1201/traffic_visualization/master/src/client/data/trips.json' // eslint-disable-line
+};
+
 document.addEventListener('contextmenu', evt => evt.preventDefault());
 
+/* To be customized */
 const LIGHT_SETTINGS = {
-  lightsPosition: [-74.05, 40.7, 8000, -73.5, 41, 5000],
+  lightsPosition: [18.0616, 59.3343, 8000, -73.5, 41, 5000],
   ambientRatio: 0.05,
   diffuseRatio: 0.6,
   specularRatio: 0.8,
@@ -26,6 +31,7 @@ export const INITIAL_VIEW_STATE = {
   latitude: 59.3343,
   zoom: 14.5,
   maxZoom: 17,
+  pitch: 45,
   bearing: 0
 };
 
@@ -78,7 +84,7 @@ export default class App extends Component {
     return [
       new TripsLayer({
         id: 'trips',
-        data: DataTrips,
+        data: DATA_URL.TRIPS,
         getPath: d => d.segments,
         getColor: d => (d.vendor === 0 ? [253, 128, 93] : [23, 184, 190]),
         opacity: 0.3,
@@ -88,7 +94,7 @@ export default class App extends Component {
       }),
       new PolygonLayer({
         id: 'buildings',
-        data: DataBuildings,
+        data: DATA_URL.BUILDINGS,
         extruded: true,
         wireframe: false,
         fp64: true,
