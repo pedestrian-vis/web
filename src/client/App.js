@@ -1,10 +1,68 @@
 /* global window */
 import React, { Component } from 'react';
-import { StaticMap } from 'react-map-gl';
-import DeckGL, { PolygonLayer } from 'deck.gl';
+import { StaticMap, MapGL } from 'react-map-gl';
+import DeckGL, { PolygonLayer, ScatterplotLayer } from 'deck.gl';
 import { TripsLayer } from '@deck.gl/experimental-layers';
 
-const MAPBOX_TOKEN = 'pk.eyJ1IjoiamVzc2llemgiLCJhIjoiY2pxeG5yNHhqMDBuZzN4cHA4ZGNwY2l3OCJ9.T2B6-B6EMW6u9XmjO4pNKw';
+import { MapboxLayer } from '@deck.gl/mapbox';
+import mapboxgl from 'mapbox-gl';
+// import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
+
+const MAPBOX_TOKEN = 'pk.eyJ1IjoidWJlcmRhdGEiLCJhIjoiY2pudzRtaWloMDAzcTN2bzN1aXdxZHB5bSJ9.2bkj3IiRC8wj3jLThvDGdA';
+mapboxgl.accessToken = MAPBOX_TOKEN;
+
+// const Map = ReactMapboxGl({
+//   accessToken: 'pk.eyJ1IjoidWJlcmRhdGEiLCJhIjoiY2pudzRtaWloMDAzcTN2bzN1aXdxZHB5bSJ9.2bkj3IiRC8wj3jLThvDGdA'
+// });
+
+// const map = new mapboxgl.Map({
+//   style: 'mapbox://styles/mapbox/light-v9',
+//   center: [18.0616, 59.3343],
+//   zoom: 14.5,
+//   pitch: 45,
+//   bearing: 0,
+//   container: 'map'
+// });
+
+// map.on('load', () => {
+//   map.addLayer({
+//     id: '3d-buildings',
+//     source: 'composite',
+//     'source-layer': 'building',
+//     filter: ['==', 'extrude', 'true'],
+//     type: 'fill-extrusion',
+//     minzoom: 15,
+//     paint: {
+//       'fill-extrusion-color': '#aaa',
+//       // use an 'interpolate' expression to add a smooth transition effect to the
+//       // buildings as the user zooms in
+//       'fill-extrusion-height': [
+//         'interpolate', ['linear'], ['zoom'],
+//         15, 0,
+//         15.05, ['get', 'height']
+//       ],
+//       'fill-extrusion-base': [
+//         'interpolate', ['linear'], ['zoom'],
+//         15, 0,
+//         15.05, ['get', 'min_height']
+//       ],
+//       'fill-extrusion-opacity': 0.6
+//     }
+//   });
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const DATA_URL = {
   BUILDINGS:
@@ -64,6 +122,24 @@ export default class App extends Component {
     }
   }
 
+
+
+
+
+
+
+  _onMapLoad = () => {
+    const map = this._map;
+    const deck = this._deck;
+
+    map.addLayer(new MapboxLayer({ id: 'my-scatterplot', deck }));
+  }
+
+
+
+
+
+
   _animate() {
     const {
       loopLength = 1800, // unit corresponds to the timestamp in source data
@@ -82,6 +158,15 @@ export default class App extends Component {
     const {trailLength = 180} = this.props;
 
     return [
+      new ScatterplotLayer({
+        id: 'my-scatterplot',
+        data: [
+          { position: [18.0616, 59.3343], size: 100 }
+        ],
+        getPosition: d => d.position,
+        getRadius: d => d.size,
+        getColor: [255, 0, 0]
+      }),
       new TripsLayer({
         id: 'trips',
         data: DATA_URL.TRIPS,
@@ -112,6 +197,10 @@ export default class App extends Component {
 
     return (
       <DeckGL
+        ref={ref => {
+          // save a reference to the Deck instance
+          this._deck = ref && ref.deck;
+        }}
         layers={this._renderLayers()}
         initialViewState={INITIAL_VIEW_STATE}
         viewState={viewState}
@@ -119,10 +208,15 @@ export default class App extends Component {
       >
         {baseMap && (
           <StaticMap
+            ref={ref => {
+              // save a reference to the mapboxgl.Map instance
+              this._map = ref && ref.getMap();
+            }}
             reuseMaps
             mapStyle="mapbox://styles/mapbox/dark-v9"
             preventStyleDiffing={true}
             mapboxApiAccessToken={MAPBOX_TOKEN}
+            onLoad={this._onMapLoad}
           />
         )}
       </DeckGL>
