@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>Display buildings in 3D</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+</head>
+<body>
+<div id='map'></div>
+<script>
+
+mapboxgl.accessToken = 'pk.eyJ1IjoidWJlcmRhdGEiLCJhIjoiY2pudzRtaWloMDAzcTN2bzN1aXdxZHB5bSJ9.2bkj3IiRC8wj3jLThvDGdA';
+const map = new mapboxgl.Map({
+    style: 'mapbox://styles/mapbox/dark-v9',
+    center: [18.0585, 59.3344],
+    zoom: 15,
+    pitch: 55,
+    bearing: 100,
+    container: 'map'
+});
+
+// The 'building' layer in the mapbox-streets vector source contains building-height
+// data from OpenStreetMap.
+map.on('load', () => {
+  map.addLayer({
+    id: '3d-buildings',
+    source: 'composite',
+    'source-layer': 'building',
+    filter: ['==', 'extrude', 'true'],
+    type: 'fill-extrusion',
+    minzoom: 10,
+    paint: {
+      'fill-extrusion-color': '#aaa',
+      'fill-extrusion-height': ['get', 'height'],
+      'fill-extrusion-base': ['get', 'min_height'],
+      'fill-extrusion-opacity': 0.2
+    }
+  });
+
+
+  features = map.queryRenderedFeatures(
+    { layers: ["building"], filter: ['==', 'extrude', 'true']}); // This is where I get building information
+
+    features.forEach(function(feature){
+      console.log(feature.geometry);  // feature.geometry getter returns building shape points (basement)
+      console.log(feature.properties.height); // this is the building height
+      // console.log(feature.properties.min_height); // this is the building part elevation from groung (e.g. a bridge)
+    });
+
+});
+</script>
+
+</body>
+</html>
