@@ -1,81 +1,19 @@
 /* global window */
 import React, { Component } from 'react';
-import { StaticMap, MapGL } from 'react-map-gl';
+import { StaticMap } from 'react-map-gl';
 import DeckGL, { PolygonLayer, ScatterplotLayer } from 'deck.gl';
 import { TripsLayer } from '@deck.gl/experimental-layers';
 
-import { MapboxLayer } from '@deck.gl/mapbox';
-import mapboxgl from 'mapbox-gl';
-// import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
+import DataBuildings from './data/buildings.json';
+import DataTrips from './data/trips.json';
 
 const MAPBOX_TOKEN = 'pk.eyJ1IjoidWJlcmRhdGEiLCJhIjoiY2pudzRtaWloMDAzcTN2bzN1aXdxZHB5bSJ9.2bkj3IiRC8wj3jLThvDGdA';
-mapboxgl.accessToken = MAPBOX_TOKEN;
-
-// const Map = ReactMapboxGl({
-//   accessToken: 'pk.eyJ1IjoidWJlcmRhdGEiLCJhIjoiY2pudzRtaWloMDAzcTN2bzN1aXdxZHB5bSJ9.2bkj3IiRC8wj3jLThvDGdA'
-// });
-
-// const map = new mapboxgl.Map({
-//   style: 'mapbox://styles/mapbox/light-v9',
-//   center: [18.0616, 59.3343],
-//   zoom: 14.5,
-//   pitch: 45,
-//   bearing: 0,
-//   container: 'map'
-// });
-
-// map.on('load', () => {
-//   map.addLayer({
-//     id: '3d-buildings',
-//     source: 'composite',
-//     'source-layer': 'building',
-//     filter: ['==', 'extrude', 'true'],
-//     type: 'fill-extrusion',
-//     minzoom: 15,
-//     paint: {
-//       'fill-extrusion-color': '#aaa',
-//       // use an 'interpolate' expression to add a smooth transition effect to the
-//       // buildings as the user zooms in
-//       'fill-extrusion-height': [
-//         'interpolate', ['linear'], ['zoom'],
-//         15, 0,
-//         15.05, ['get', 'height']
-//       ],
-//       'fill-extrusion-base': [
-//         'interpolate', ['linear'], ['zoom'],
-//         15, 0,
-//         15.05, ['get', 'min_height']
-//       ],
-//       'fill-extrusion-opacity': 0.6
-//     }
-//   });
-// });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-const DATA_URL = {
-  BUILDINGS:
-    'https://raw.githubusercontent.com/Jessie1201/traffic_visualization/master/src/client/data/buildings.json', // eslint-disable-line
-  TRIPS:
-    'https://raw.githubusercontent.com/Jessie1201/traffic_visualization/master/src/client/data/trips.json' // eslint-disable-line
-};
 
 document.addEventListener('contextmenu', evt => evt.preventDefault());
 
 /* To be customized */
 const LIGHT_SETTINGS = {
-  lightsPosition: [18.0616, 59.3343, 8000, -73.5, 41, 5000],
+  lightsPosition: [18.0585, 59.3344, 8000, -73.5, 41, 5000],
   ambientRatio: 0.05,
   diffuseRatio: 0.6,
   specularRatio: 0.8,
@@ -85,12 +23,12 @@ const LIGHT_SETTINGS = {
 
 /* Kungsgatan view */
 export const INITIAL_VIEW_STATE = {
-  longitude: 18.0616,
-  latitude: 59.3343,
-  zoom: 14.5,
+  longitude: 18.0585,
+  latitude: 59.3344,
+  zoom: 15,
   maxZoom: 17,
-  pitch: 45,
-  bearing: 0
+  pitch: 55,
+  bearing: 100
 };
 
 /* New York view for uber example */
@@ -122,24 +60,6 @@ export default class App extends Component {
     }
   }
 
-
-
-
-
-
-
-  _onMapLoad = () => {
-    const map = this._map;
-    const deck = this._deck;
-
-    map.addLayer(new MapboxLayer({ id: 'my-scatterplot', deck }));
-  }
-
-
-
-
-
-
   _animate() {
     const {
       loopLength = 1800, // unit corresponds to the timestamp in source data
@@ -158,18 +78,9 @@ export default class App extends Component {
     const {trailLength = 180} = this.props;
 
     return [
-      new ScatterplotLayer({
-        id: 'my-scatterplot',
-        data: [
-          { position: [18.0616, 59.3343], size: 100 }
-        ],
-        getPosition: d => d.position,
-        getRadius: d => d.size,
-        getColor: [255, 0, 0]
-      }),
       new TripsLayer({
         id: 'trips',
-        data: DATA_URL.TRIPS,
+        data: DataTrips,
         getPath: d => d.segments,
         getColor: d => (d.vendor === 0 ? [253, 128, 93] : [23, 184, 190]),
         opacity: 0.3,
@@ -179,11 +90,11 @@ export default class App extends Component {
       }),
       new PolygonLayer({
         id: 'buildings',
-        data: DATA_URL.BUILDINGS,
+        data: DataBuildings,
         extruded: true,
         wireframe: false,
         fp64: true,
-        opacity: 0.5,
+        opacity: 0.2,
         getPolygon: f => f.polygon,
         getElevation: f => f.height,
         getFillColor: [74, 80, 87],
@@ -197,10 +108,6 @@ export default class App extends Component {
 
     return (
       <DeckGL
-        ref={ref => {
-          // save a reference to the Deck instance
-          this._deck = ref && ref.deck;
-        }}
         layers={this._renderLayers()}
         initialViewState={INITIAL_VIEW_STATE}
         viewState={viewState}
@@ -208,15 +115,10 @@ export default class App extends Component {
       >
         {baseMap && (
           <StaticMap
-            ref={ref => {
-              // save a reference to the mapboxgl.Map instance
-              this._map = ref && ref.getMap();
-            }}
             reuseMaps
             mapStyle="mapbox://styles/mapbox/dark-v9"
             preventStyleDiffing={true}
             mapboxApiAccessToken={MAPBOX_TOKEN}
-            onLoad={this._onMapLoad}
           />
         )}
       </DeckGL>

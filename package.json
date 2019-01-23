@@ -13,9 +13,9 @@
   },
   "author": "Jiaqi Zheng",
   "dependencies": {
-    "@deck.gl/experimental-layers": "^6.3.4",
+    "@deck.gl/experimental-layers": "^6.3.6",
     "babel-polyfill": "^6.26.0",
-    "deck.gl": "^6.3.4",
+    "deck.gl": "^6.3.6",
     "express": "^4.16.3",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
