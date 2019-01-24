@@ -1,14 +1,13 @@
 /* global window */
 import React, { Component } from 'react';
 import { StaticMap } from 'react-map-gl';
-import DeckGL, { PolygonLayer, ScatterplotLayer } from 'deck.gl';
+import DeckGL, { PolygonLayer } from 'deck.gl';
 import { TripsLayer } from '@deck.gl/experimental-layers';
 
 import DataBuildings from './data/buildings.json';
 import DataTrips from './data/trips.json';
 
 const MAPBOX_TOKEN = 'pk.eyJ1IjoidWJlcmRhdGEiLCJhIjoiY2pudzRtaWloMDAzcTN2bzN1aXdxZHB5bSJ9.2bkj3IiRC8wj3jLThvDGdA';
-
 document.addEventListener('contextmenu', evt => evt.preventDefault());
 
 /* To be customized */
@@ -17,7 +16,7 @@ const LIGHT_SETTINGS = {
   ambientRatio: 0.05,
   diffuseRatio: 0.6,
   specularRatio: 0.8,
-  lightsStrength: [2.0, 0.0, 0.0, 0.0],
+  lightsStrength: [2.5, 0.0, 0.0, 0.0],
   numberOfLights: 2
 };
 
@@ -31,18 +30,7 @@ export const INITIAL_VIEW_STATE = {
   bearing: 100
 };
 
-/* New York view for uber example */
-// export const INITIAL_VIEW_STATE = {
-//   longitude: -74,
-//   latitude: 40.72,
-//   zoom: 14,
-//   maxZoom: 16,
-//   pitch: 45,
-//   bearing: 0
-// };
-
 export default class App extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
