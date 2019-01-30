@@ -12,22 +12,22 @@ document.addEventListener('contextmenu', evt => evt.preventDefault());
 
 /* To be customized */
 const LIGHT_SETTINGS = {
-  lightsPosition: [18.0585, 59.3344, 8000, -73.5, 41, 5000],
+  lightsPosition: [18.0585, 59.3044, 8000, -73.5, 41, 5000],
   ambientRatio: 0.05,
   diffuseRatio: 0.6,
   specularRatio: 0.8,
-  lightsStrength: [2.5, 0.0, 0.0, 0.0],
+  lightsStrength: [2.2, 0.0, 0.0, 0.0],
   numberOfLights: 2
 };
 
 /* Kungsgatan view */
 export const INITIAL_VIEW_STATE = {
-  longitude: 18.0585,
-  latitude: 59.3344,
-  zoom: 15,
-  maxZoom: 17,
-  pitch: 55,
-  bearing: 100
+  longitude: 18.0599,
+  latitude: 59.3352,
+  zoom: 16.5,
+  maxZoom: 20,
+  pitch: 45,
+  bearing: -60
 };
 
 export default class App extends Component {
@@ -82,7 +82,7 @@ export default class App extends Component {
         extruded: true,
         wireframe: false,
         fp64: true,
-        opacity: 0.2,
+        opacity: 0.08,
         getPolygon: f => f.polygon,
         getElevation: f => f.height,
         getFillColor: [74, 80, 87],
