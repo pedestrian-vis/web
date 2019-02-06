@@ -7,12 +7,12 @@ import { TripsLayer } from '@deck.gl/experimental-layers';
 import DataBuildings from './data/buildings.json';
 import DataTrips from './data/trips.json';
 
-const MAPBOX_TOKEN = 'pk.eyJ1IjoidWJlcmRhdGEiLCJhIjoiY2pudzRtaWloMDAzcTN2bzN1aXdxZHB5bSJ9.2bkj3IiRC8wj3jLThvDGdA';
+const MAPBOX_TOKEN = 'pk.eyJ1IjoiamVzc2llemgiLCJhIjoiY2pxeG5yNHhqMDBuZzN4cHA4ZGNwY2l3OCJ9.T2B6-B6EMW6u9XmjO4pNKw';
 document.addEventListener('contextmenu', evt => evt.preventDefault());
 
 /* To be customized */
 const LIGHT_SETTINGS = {
-  lightsPosition: [18.0585, 59.3044, 8000, -73.5, 41, 5000],
+  lightsPosition: [18.06363, 59.33553, 8000, -73.5, 41, 5000],
   ambientRatio: 0.05,
   diffuseRatio: 0.6,
   specularRatio: 0.8,
@@ -22,12 +22,10 @@ const LIGHT_SETTINGS = {
 
 /* Kungsgatan view */
 export const INITIAL_VIEW_STATE = {
-  longitude: 18.0599,
-  latitude: 59.3352,
-  zoom: 16.5,
-  maxZoom: 20,
-  pitch: 45,
-  bearing: -60
+  longitude: 18.06363,
+  latitude: 59.33553,
+  zoom: 19,
+  maxZoom: 22
 };
 
 export default class App extends Component {
@@ -104,7 +102,8 @@ export default class App extends Component {
         {baseMap && (
           <StaticMap
             reuseMaps
-            mapStyle="mapbox://styles/mapbox/dark-v9"
+            mapStyle="mapbox://styles/jessiezh/cjrq2mxcvd7ul2toc5dllfbyu"
+            // mapStyle="mapbox://styles/mapbox/dark-v9"
             preventStyleDiffing={true}
             mapboxApiAccessToken={MAPBOX_TOKEN}
           />
