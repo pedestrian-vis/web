@@ -5,7 +5,7 @@ import DeckGL, { PolygonLayer, PathLayer } from 'deck.gl';
 import { TripsLayer } from '@deck.gl/experimental-layers';
 
 import DataBuildings from './data/buildings.json';
-import DataTrips from './data/trips.json';
+import PedestrianTrips from './data/pedestrians.json';
 import DataZebras from './data/zebras.json';
 
 // // Not mine
@@ -66,17 +66,15 @@ export default class App extends Component {
   }
 
   _renderLayers() {
-    const {trailLength = 180} = this.props;
-
     return [
       new TripsLayer({
         id: 'trips',
-        data: DataTrips,
-        getPath: d => d.segments,
-        getColor: d => (d.vendor === 0 ? [253, 128, 93] : [23, 184, 190]),
-        opacity: 0.3,
+        data: PedestrianTrips,
+        getPath: d => d.trajactory,
+        getColor: d => (d.violation === 0 ? [253, 128, 93] : [23, 184, 190]),
+        opacity: 1.0,
         strokeWidth: 2,
-        trailLength,
+        trailLength: 20,
         currentTime: this.state.time
       }),
       new PolygonLayer({
@@ -97,7 +95,7 @@ export default class App extends Component {
         fp64: true,
         getPath: f => f.line,
         positionFormat: `XY`,
-        getColor: [255, 255, 255, 100],
+        getColor: [255, 255, 255, 30],
         getWidth: 0.6
       })
     ];
