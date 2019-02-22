@@ -5,8 +5,7 @@ import DeckGL, { PolygonLayer, PathLayer, ScatterplotLayer } from 'deck.gl';
 import { TripsLayer } from '@deck.gl/experimental-layers';
 
 import DataBuildings from './data/buildings.json';
-import DataPedestrianTrips from './data/pedestrians.json';
-import DataPedestrians from './data/pedestrians_dot.json';
+import DataPedestrians from './data/pedestrians.json';
 import DataZebras from './data/zebras.json';
 
 // // Not mine
@@ -54,7 +53,7 @@ export default class App extends Component {
 
   _animate() {
     const {
-      loopLength = 200, // unit corresponds to the timestamp in source data
+      loopLength = 350, // unit corresponds to the timestamp in source data
       animationSpeed = 30 // unit time per second
     } = this.props;
     const timestamp = Date.now() / 1000;
@@ -73,17 +72,26 @@ export default class App extends Component {
         data: DataPedestrians,
         opacity: 0.8,
         fp64: true,
-        getPosition: d => [d.coordinates[0], d.coordinates[1], 0],
-        getRadius: 0.3,
-        getColor: [253, 128, 93]
+        getPosition: (d) => {
+          for (let i = 0; i < d.trajactory.length; i++) {
+            if (d.trajactory[i][2] === Math.floor(this.state.time)) {
+              return [d.trajactory[i][0], d.trajactory[i][1], 0];
+            }
+          }
+        },
+        getRadius: 0.27,
+        getColor: [253, 128, 93],
+        updateTriggers: {
+          getPosition: this.state.time
+        }
       }),
       new TripsLayer({
         id: 'pedestrian_path',
-        data: DataPedestrianTrips,
-        getPath: d => d.trajactory,
+        data: DataPedestrians,
+        getPath: d => d.nodes,
         getColor: d => (d.violation === 0 ? [253, 128, 93] : [23, 184, 190]),
         opacity: 1.0,
-        trailLength: 20,
+        trailLength: 30,
         currentTime: this.state.time
       }),
       new PolygonLayer({
@@ -112,6 +120,7 @@ export default class App extends Component {
 
   render() {
     const {viewState, controller = true, baseMap = true} = this.props;
+    // console.log(Math.floor(this.state.time));
 
     return (
       <DeckGL
