@@ -1,11 +1,12 @@
 /* global window */
 import React, { Component } from 'react';
 import { StaticMap } from 'react-map-gl';
-import DeckGL, { PolygonLayer, PathLayer } from 'deck.gl';
+import DeckGL, { PolygonLayer, PathLayer, ScatterplotLayer } from 'deck.gl';
 import { TripsLayer } from '@deck.gl/experimental-layers';
 
 import DataBuildings from './data/buildings.json';
-import PedestrianTrips from './data/pedestrians.json';
+import DataPedestrianTrips from './data/pedestrians.json';
+import DataPedestrians from './data/pedestrians_dot.json';
 import DataZebras from './data/zebras.json';
 
 // // Not mine
@@ -53,7 +54,7 @@ export default class App extends Component {
 
   _animate() {
     const {
-      loopLength = 1800, // unit corresponds to the timestamp in source data
+      loopLength = 200, // unit corresponds to the timestamp in source data
       animationSpeed = 30 // unit time per second
     } = this.props;
     const timestamp = Date.now() / 1000;
@@ -67,13 +68,21 @@ export default class App extends Component {
 
   _renderLayers() {
     return [
+      new ScatterplotLayer({
+        id: 'pedestrians',
+        data: DataPedestrians,
+        opacity: 0.8,
+        fp64: true,
+        getPosition: d => [d.coordinates[0], d.coordinates[1], 0],
+        getRadius: 0.3,
+        getColor: [253, 128, 93]
+      }),
       new TripsLayer({
-        id: 'trips',
-        data: PedestrianTrips,
+        id: 'pedestrian_path',
+        data: DataPedestrianTrips,
         getPath: d => d.trajactory,
         getColor: d => (d.violation === 0 ? [253, 128, 93] : [23, 184, 190]),
         opacity: 1.0,
-        strokeWidth: 2,
         trailLength: 20,
         currentTime: this.state.time
       }),

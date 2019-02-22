@@ -2,7 +2,7 @@
   "name": "thesis_vis",
   "version": "1.0.0",
   "license": "MIT",
-  "description": "Boilerplate to build a full stack web application using React, Node.js, Express and Webpack.",
+  "description": "Master thesis project of pedestrian running-a-light behavior simulation and visualization",
   "main": "src/server/index.js",
   "scripts": {
     "build": "webpack --mode production",
