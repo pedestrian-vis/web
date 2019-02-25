@@ -6,6 +6,7 @@ import { TripsLayer } from '@deck.gl/experimental-layers';
 
 import DataBuildings from './data/buildings.json';
 import DataPedestrians from './data/pedestrians.json';
+import DataVehicles from './data/vehicles.json';
 import DataZebras from './data/zebras.json';
 
 // // Not mine
@@ -53,7 +54,7 @@ export default class App extends Component {
 
   _animate() {
     const {
-      loopLength = 350, // unit corresponds to the timestamp in source data
+      loopLength = 300, // unit corresponds to the timestamp in source data
       animationSpeed = 30 // unit time per second
     } = this.props;
     const timestamp = Date.now() / 1000;
@@ -73,7 +74,7 @@ export default class App extends Component {
         opacity: 0.8,
         fp64: true,
         getPosition: (d) => {
-          for (let i = 0; i < d.trajactory.length; i++) {
+          for (let i = 0; i < d.trajactory.length; i += 1) {
             if (d.trajactory[i][2] === Math.floor(this.state.time)) {
               return [d.trajactory[i][0], d.trajactory[i][1], 0];
             }
@@ -114,6 +115,26 @@ export default class App extends Component {
         positionFormat: `XY`,
         getColor: [255, 255, 255, 30],
         getWidth: 0.6
+      }),
+      new PathLayer({
+        id: 'vehicles',
+        data: DataVehicles,
+        fp64: false,
+        // getPath: d => [d.vertices[13][0], d.vertices[13][1]],
+        getPath: (d) => {
+          for (let i = 0; i < d.vertices.length; i += 1) {
+            if (d.vertices[i][2] === Math.floor(this.state.time)) {
+              return [d.vertices[i][0], d.vertices[i][1]];
+            }
+          }
+        },
+        opacity: 0.005,
+        positionFormat: `XY`,
+        getColor: [0,119,179],
+        getWidth: 4,
+        updateTriggers: {
+          getPath: this.state.time
+        }
       })
     ];
   }

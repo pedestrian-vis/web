@@ -7,7 +7,6 @@ def get_zebras(a, b, c, n):
         end.append(start[0] + b[0] - a[0])
         end.append(start[1] + b[1] - a[1])
         print str(start) + "," + str(end)
-
 # get_zebras([18.063224920000003, 59.335602640000005],[18.063164597, 59.335665137999996], [18.063630298847826, 59.3357035368913], 22)
 # get_zebras([18.063219416905927, 59.33553139337154], [18.06310800507686, 59.3355043734761],[18.06332333756404, 59.33542726421548], 11)
 # get_zebras([18.063574122393632, 59.33534103086854],[18.063659496528416, 59.3352529905227],[18.064001722219146, 59.33544889028823], 23)
@@ -29,6 +28,20 @@ def get_positionbytime(a_appear, a_start, b_get):
             y_new = a_start[1] + (b_get[1] - a_start[1]) * t / (b_get[2] - a_start[2])
             print str([x_new, y_new, a_start[2] + t + 1]) + ','
             t += 1
+# get_positionbytime([18.063593368489585, 59.3352888431697, 0], [18.063593368489585, 59.3352888431697, 50], [18.064326010284873, 59.3355074345595, 420])
 
-get_positionbytime([18.063593368489585, 59.3352888431697, 0], [18.063593368489585, 59.3352888431697, 50], [18.064326010284873, 59.3355074345595, 420])
-
+# unit_x and unit_y is both the moving speed, and a length unit, depended on n (free to defiine)
+def get_stream_straight(a, b, n, length, time_move):
+        unit_x = (b[0] - a[0])/n
+        unit_y = (b[1] - a[1])/n
+        for time in range(n + length):
+                vertices = []
+                x0 = a[0] + unit_x * (time - length)
+                y0 = a[1] + unit_y * (time - length)
+                x1 = a[0] + unit_x * time
+                y1 = a[1] + unit_y * time
+                vertices.append([x0, y0])
+                vertices.append([x1, y1])
+                vertices.append(time_move + time)
+                print str(vertices) + ','
+get_stream_straight([18.06300778208208, 59.33595276419638], [18.063958366249636, 59.33506564023946], 60, 30, 50)
