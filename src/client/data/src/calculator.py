@@ -30,18 +30,44 @@ def get_positionbytime(a_appear, a_start, b_get):
             t += 1
 # get_positionbytime([18.063593368489585, 59.3352888431697, 0], [18.063593368489585, 59.3352888431697, 50], [18.064326010284873, 59.3355074345595, 420])
 
-# unit_x and unit_y is both the moving speed, and a length unit, depended on n (free to defiine)
-def get_stream_straight(a, b, n, length, time_move):
+# n impacts vehicle speed, should meet length > n
+# within the test so far, length = 60, loop = 300
+def get_stream_straight(a, b, n, length, time_move, loop):
         unit_x = (b[0] - a[0])/n
         unit_y = (b[1] - a[1])/n
-        for time in range(n + length):
+        for i in range(time_move):
                 vertices = []
-                x0 = a[0] + unit_x * (time - length)
-                y0 = a[1] + unit_y * (time - length)
-                x1 = a[0] + unit_x * time
-                y1 = a[1] + unit_y * time
-                vertices.append([x0, y0])
-                vertices.append([x1, y1])
-                vertices.append(time_move + time)
+                vertices.append(a)
+                vertices.append(a)
+                vertices.append(i)
                 print str(vertices) + ','
-get_stream_straight([18.06300778208208, 59.33595276419638], [18.063958366249636, 59.33506564023946], 60, 30, 50)
+        for i in range(n):
+                vertices = []
+                vertices.append(a)
+                x1 = a[0] + unit_x * i
+                y1 = a[1] + unit_y * i
+                vertices.append([x1, y1])
+                vertices.append(time_move + i)
+                print str(vertices) + ','
+        for i in range(length - n):
+                vertices_still = []
+                vertices_still.append(vertices[0])
+                vertices_still.append(vertices[1])
+                vertices_still.append(vertices[2] + i + 1)
+                print str(vertices_still) + ','
+        for i in range(n):
+                vertices = []
+                x0 = a[0] + unit_x * i
+                y0 = a[1] + unit_y * i
+                vertices.append([x0, y0])
+                vertices.append(b)
+                vertices.append(time_move + length + i)
+                print str(vertices) + ','
+        for i in range(loop - vertices[2]):
+                vertices_final = []
+                vertices_final.append(vertices[1])
+                vertices_final.append(vertices[1])
+                vertices_final.append(vertices[2] + i + 1)
+                print str(vertices_final) + ','
+# get_stream_straight([18.063096039455445, 59.33590890330365], [18.06391267666723, 59.335090343377004], 60, 120, 50, 300)
+# get_stream_straight([18.06409091527763, 59.33515416996701], [18.063312828735775, 59.33590109151288], 60, 70, 150, 300)

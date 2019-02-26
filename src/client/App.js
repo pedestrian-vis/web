@@ -120,7 +120,6 @@ export default class App extends Component {
         id: 'vehicles',
         data: DataVehicles,
         fp64: false,
-        // getPath: d => [d.vertices[13][0], d.vertices[13][1]],
         getPath: (d) => {
           for (let i = 0; i < d.vertices.length; i += 1) {
             if (d.vertices[i][2] === Math.floor(this.state.time)) {
@@ -128,9 +127,9 @@ export default class App extends Component {
             }
           }
         },
-        opacity: 0.005,
+        opacity: 0.003,
         positionFormat: `XY`,
-        getColor: [0,119,179],
+        getColor: [253, 128, 93],
         getWidth: 4,
         updateTriggers: {
           getPath: this.state.time
@@ -141,7 +140,6 @@ export default class App extends Component {
 
   render() {
     const {viewState, controller = true, baseMap = true} = this.props;
-    // console.log(Math.floor(this.state.time));
 
     return (
       <DeckGL
