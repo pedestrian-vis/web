@@ -8,6 +8,8 @@ import DataBuildings from './data/buildings.json';
 import DataPedestrians from './data/pedestrians.json';
 import DataVehicles from './data/vehicles.json';
 import DataZebras from './data/zebras.json';
+import DataLanes from './data/env_lanes.json';
+import DataRound from './data/env_round.json';
 
 // // Not mine
 // const MAPBOX_TOKEN = 'pk.eyJ1IjoidWJlcmRhdGEiLCJhIjoiY2pudzRtaWloMDAzcTN2bzN1aXdxZHB5bSJ9.2bkj3IiRC8wj3jLThvDGdA';
@@ -99,8 +101,6 @@ export default class App extends Component {
         id: 'buildings',
         data: DataBuildings,
         extruded: true,
-        wireframe: false,
-        fp64: true,
         opacity: 0.08,
         getPolygon: f => f.polygon,
         getElevation: f => f.height,
@@ -110,11 +110,25 @@ export default class App extends Component {
       new PathLayer({
         id: 'zebras',
         data: DataZebras,
-        fp64: true,
         getPath: f => f.line,
         positionFormat: `XY`,
         getColor: [255, 255, 255, 30],
         getWidth: 0.6
+      }),
+      new PathLayer({
+        id: 'env_lanes',
+        data: DataLanes,
+        getPath: d => d.line,
+        positionFormat: `XY`,
+        getColor: [255, 255, 255, 20],
+        getWidth: d => d.width
+      }),
+      new PolygonLayer({
+        id: 'env_round',
+        data: DataRound,
+        stroked: false,
+        getPolygon: f => f.contour,
+        getFillColor: [255, 255, 255, 20]
       }),
       new PathLayer({
         id: 'vehicles',
@@ -130,7 +144,7 @@ export default class App extends Component {
         opacity: 0.003,
         positionFormat: `XY`,
         getColor: [253, 128, 93],
-        getWidth: 4,
+        getWidth: 2.4,
         updateTriggers: {
           getPath: this.state.time
         }
