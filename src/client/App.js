@@ -7,15 +7,17 @@ import { TripsLayer } from '@deck.gl/experimental-layers';
 import DataBuildings from './data/buildings.json';
 import DataPedestrians from './data/pedestrians.json';
 import DataVehicles from './data/vehicles.json';
-import DataZebras from './data/zebras.json';
+import DataZebras from './data/env_zebras.json';
 import DataLanes from './data/env_lanes.json';
-import DataRound from './data/env_round.json';
+import DataBuffer from './data/env_buffer.json';
+import DataLights from './data/env_lights.json';
 
 // // Not mine
 // const MAPBOX_TOKEN = 'pk.eyJ1IjoidWJlcmRhdGEiLCJhIjoiY2pudzRtaWloMDAzcTN2bzN1aXdxZHB5bSJ9.2bkj3IiRC8wj3jLThvDGdA';
 
 // My token, enable when using my mapbox style
 const MAPBOX_TOKEN = 'pk.eyJ1IjoiamVzc2llemgiLCJhIjoiY2pxeG5yNHhqMDBuZzN4cHA4ZGNwY2l3OCJ9.T2B6-B6EMW6u9XmjO4pNKw';
+
 document.addEventListener('contextmenu', evt => evt.preventDefault());
 
 /* To be customized */
@@ -33,7 +35,7 @@ export const INITIAL_VIEW_STATE = {
   longitude: 18.06363,
   latitude: 59.33553,
   zoom: 19,
-  maxZoom: 22
+  maxZoom: 24
 };
 
 export default class App extends Component {
@@ -108,7 +110,7 @@ export default class App extends Component {
         lightSettings: LIGHT_SETTINGS
       }),
       new PathLayer({
-        id: 'zebras',
+        id: 'env_zebras',
         data: DataZebras,
         getPath: f => f.line,
         positionFormat: `XY`,
@@ -120,15 +122,30 @@ export default class App extends Component {
         data: DataLanes,
         getPath: d => d.line,
         positionFormat: `XY`,
-        getColor: [255, 255, 255, 20],
+        getColor: [255, 255, 255, 30],
         getWidth: d => d.width
       }),
       new PolygonLayer({
-        id: 'env_round',
-        data: DataRound,
+        id: 'env_buffer',
+        data: DataBuffer,
         stroked: false,
-        getPolygon: f => f.contour,
-        getFillColor: [255, 255, 255, 20]
+        extruded: true,
+        wireframe: true,
+        getPolygon: d => d.contour,
+        getElevation: d => d.height,
+        getFillColor: [255, 255, 255, 30],
+        getLineColor: [255, 255, 255, 70]
+      }),
+      new PolygonLayer({
+        id: 'env_lights',
+        data: DataLights,
+        stroked: false,
+        extruded: true,
+        wireframe: true,
+        getPolygon: d => d.contour,
+        getElevation: 0.7,
+        getFillColor: d => (d.green === 1 ? [0, 255, 0, 120] : [255, 0, 0, 120]),
+        getLineColor: [255, 255, 255, 70]
       }),
       new PathLayer({
         id: 'vehicles',
