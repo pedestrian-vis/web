@@ -22,7 +22,7 @@ document.addEventListener('contextmenu', evt => evt.preventDefault());
 
 /* To be customized */
 const LIGHT_SETTINGS = {
-  lightsPosition: [18.06363, 59.33553, 8000, -73.5, 41, 5000],
+  lightsPosition: [18.06363, 59.335512, 8000, -73.5, 41, 5000],
   ambientRatio: 0.05,
   diffuseRatio: 0.6,
   specularRatio: 0.8,
@@ -33,7 +33,7 @@ const LIGHT_SETTINGS = {
 /* Kungsgatan view */
 export const INITIAL_VIEW_STATE = {
   longitude: 18.06363,
-  latitude: 59.33553,
+  latitude: 59.335512,
   zoom: 19,
   maxZoom: 24
 };
@@ -123,7 +123,7 @@ export default class App extends Component {
         getPath: d => d.line,
         positionFormat: `XY`,
         getColor: [255, 255, 255, 30],
-        getWidth: d => d.width
+        getWidth: 0.1
       }),
       new PolygonLayer({
         id: 'env_buffer',
@@ -144,7 +144,7 @@ export default class App extends Component {
         wireframe: true,
         getPolygon: d => d.contour,
         getElevation: 0.7,
-        getFillColor: d => (d.green === 1 ? [0, 255, 0, 120] : [255, 0, 0, 120]),
+        getFillColor: d => (d.green === 1 ? [18, 131, 18, 120] : [255, 0, 0, 120]),
         getLineColor: [255, 255, 255, 70]
       }),
       new PathLayer({

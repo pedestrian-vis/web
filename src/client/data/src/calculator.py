@@ -1,3 +1,61 @@
+# Assisting calculation for drawing the environment
+def middle_coordinates(a, b):
+    middle = []
+    middle.append((a[0] + b[0])/2)
+    middle.append((a[1] + b[1])/2)
+    print middle
+
+def away_from_center(a, ref, ratio):
+    b = [(a[0] - ref[0]) * ratio + ref[0], (a[1] - ref[1]) * ratio + ref[1]]
+    print b
+
+def stretch_line(a, b, ratio):
+    middle = []
+    middle.append((a[0] + b[0])/2)
+    middle.append((a[1] + b[1])/2)
+    a1 = []
+    a1.append(middle[0] + ratio * (a[0] - middle[0]))
+    a1.append(middle[1] + ratio * (a[1] - middle[1]))
+    b1 = []
+    b1.append(middle[0] + ratio * (b[0] - middle[0]))
+    b1.append(middle[1] + ratio * (b[1] - middle[1]))
+    print str(a1) + ',' + str(b1)
+
+def move_line_along(a, b, ref_a, ref_b, ratio):
+    x_move = ratio * (ref_a[0] - ref_b[0])
+    y_move = ratio * (ref_a[1] - ref_b[1])
+    a_transform = [a[0] + x_move, a[1] + y_move]
+    b_transform = [b[0] + x_move, b[1] + y_move]
+    print str(a_transform) + ',' + str(b_transform)
+
+def move_point_along(a, ref_a, ref_b, ratio):
+    a1 = [a[0] + (ref_b[0] - ref_a[0]) * ratio, a[1] + (ref_b[1] - ref_a[1]) * ratio]
+    print str(a1) + ','
+
+def move_obj_along(list, ref_a, ref_b, ratio):
+    for el in list:
+            transform = [el[0] + (ref_b[0] - ref_a[0]) * ratio, el[1] + (ref_b[1] - ref_a[1]) * ratio]
+            print str(transform) + ','
+
+def three_from_stopline(a_stop, b_stop, ref_a, ref_b, ratio):
+    a1 = [a_stop[0] + (b_stop[0] - a_stop[0])/3, a_stop[1] + (b_stop[1] - a_stop[1])/3]
+    a2 = [a_stop[0] + 2 * (b_stop[0] - a_stop[0])/3, a_stop[1] + 2 * (b_stop[1] - a_stop[1])/3]
+    b1 = [a1[0] + ratio * (ref_b[0] - ref_a[0]), a1[1] + ratio * (ref_b[1] - ref_a[1])]
+    b2 = [a2[0] + ratio * (ref_b[0] - ref_a[0]), a2[1] + ratio * (ref_b[1] - ref_a[1])]
+    print str(a1) + ', ' + str(b1)
+    print str(a2) + ', ' + str(b2)
+
+def four_from_stopline(a_stop, b_stop, ref_a, ref_b, ratio):
+    a1 = [a_stop[0] + (b_stop[0] - a_stop[0])/4, a_stop[1] + (b_stop[1] - a_stop[1])/4]
+    a2 = [a_stop[0] + 2 * (b_stop[0] - a_stop[0])/4, a_stop[1] + 2 * (b_stop[1] - a_stop[1])/4]
+    a3 = [a_stop[0] + 3 * (b_stop[0] - a_stop[0])/4, a_stop[1] + 3 * (b_stop[1] - a_stop[1])/4]
+    b1 = [a1[0] + ratio * (ref_b[0] - ref_a[0]), a1[1] + ratio * (ref_b[1] - ref_a[1])]
+    b2 = [a2[0] + ratio * (ref_b[0] - ref_a[0]), a2[1] + ratio * (ref_b[1] - ref_a[1])]
+    b3 = [a3[0] + ratio * (ref_b[0] - ref_a[0]), a3[1] + ratio * (ref_b[1] - ref_a[1])]
+    print str(a1) + ', ' + str(b1)
+    print str(a2) + ', ' + str(b2)
+    print str(a3) + ', ' + str(b3)
+
 def get_zebras(a, b, c, n):
     for x in range(n):
         start = []
@@ -7,17 +65,9 @@ def get_zebras(a, b, c, n):
         end.append(start[0] + b[0] - a[0])
         end.append(start[1] + b[1] - a[1])
         print str(start) + "," + str(end)
-# get_zebras([18.063224920000003, 59.335602640000005],[18.063164597, 59.335665137999996], [18.063630298847826, 59.3357035368913], 22)
-# get_zebras([18.063219416905927, 59.33553139337154], [18.06310800507686, 59.3355043734761],[18.06332333756404, 59.33542726421548], 11)
-# get_zebras([18.063574122393632, 59.33534103086854],[18.063659496528416, 59.3352529905227],[18.064001722219146, 59.33544889028823], 23)
-# get_zebras([18.063842435380604, 59.33571152184798],[18.06395894323627, 59.33573975949038],[18.06400580911104, 59.335556200250764],16)
 
-def get_middle_coordinates(a, b):
-    middle = []
-    middle.append((a[0] + b[0])/2)
-    middle.append((a[1] + b[1])/2)
-    print middle
 
+# Below starts simulation related
 def get_positionbytime(a_appear, a_start, b_get):
     for x in range(a_start[2] - a_appear[2]):
             print str([a_appear[0], a_appear[1], x+1]) + ','
@@ -30,18 +80,18 @@ def get_positionbytime(a_appear, a_start, b_get):
             t += 1
 # get_positionbytime([18.063593368489585, 59.3352888431697, 0], [18.063593368489585, 59.3352888431697, 50], [18.064326010284873, 59.3355074345595, 420])
 
+def get_stream_straight(a, b, n, length, time_move, loop):
 # n impacts vehicle speed, should meet length > n
 # within the test so far, length = 60, loop = 300
-def get_stream_straight(a, b, n, length, time_move, loop):
         unit_x = (b[0] - a[0])/n
         unit_y = (b[1] - a[1])/n
-        for i in range(time_move):
+        for i in range(time_move): # before moving
                 vertices = []
                 vertices.append(a)
                 vertices.append(a)
                 vertices.append(i)
                 print str(vertices) + ','
-        for i in range(n):
+        for i in range(n): # appearing
                 vertices = []
                 vertices.append(a)
                 x1 = a[0] + unit_x * i
@@ -49,13 +99,13 @@ def get_stream_straight(a, b, n, length, time_move, loop):
                 vertices.append([x1, y1])
                 vertices.append(time_move + i)
                 print str(vertices) + ','
-        for i in range(length - n):
+        for i in range(length - n): # still stream on road
                 vertices_still = []
                 vertices_still.append(vertices[0])
                 vertices_still.append(vertices[1])
                 vertices_still.append(vertices[2] + i + 1)
                 print str(vertices_still) + ','
-        for i in range(n):
+        for i in range(n): # disappearing
                 vertices = []
                 x0 = a[0] + unit_x * i
                 y0 = a[1] + unit_y * i
@@ -63,7 +113,7 @@ def get_stream_straight(a, b, n, length, time_move, loop):
                 vertices.append(b)
                 vertices.append(time_move + length + i)
                 print str(vertices) + ','
-        for i in range(loop - vertices[2]):
+        for i in range(loop - vertices[2]): # after gone
                 vertices_final = []
                 vertices_final.append(vertices[1])
                 vertices_final.append(vertices[1])
