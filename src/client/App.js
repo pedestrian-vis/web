@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 import { StaticMap } from 'react-map-gl';
 import DeckGL, { PolygonLayer, PathLayer, ScatterplotLayer } from 'deck.gl';
 import { TripsLayer } from '@deck.gl/experimental-layers';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import Slider from '@material-ui/lab/Slider';
+import './app.css';
 
 import DataBuildings from './data/buildings.json';
 import DataPedestrians from './data/pedestrians.json';
@@ -18,22 +21,32 @@ import DataLights from './data/env_lights.json';
 // My token, enable when using my mapbox style
 const MAPBOX_TOKEN = 'pk.eyJ1IjoiamVzc2llemgiLCJhIjoiY2pxeG5yNHhqMDBuZzN4cHA4ZGNwY2l3OCJ9.T2B6-B6EMW6u9XmjO4pNKw';
 
-document.addEventListener('contextmenu', evt => evt.preventDefault());
+document.addEventListener('contextmenu', evt => evt.preventDefault()); // give way to perspective control
 
 /* Kungsgatan view */
 export const INITIAL_VIEW_STATE = {
-  longitude: 18.06363,
+  longitude: 18.06360,
   latitude: 59.335512,
-  zoom: 19,
+  zoom: 18.97,
   maxZoom: 21.3,
   minZoom: 18.5
 };
+
+/* Override material-ui theme color */
+const theme = createMuiTheme({
+  palette: {
+    primary: { main: 'rgb(253, 128, 93)' },
+  },
+  typography: { useNextVariants: true },
+});
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      time: 0
+      time: 0,
+      hurryValue: 50,
+      flowValue: 20
     };
   }
 
@@ -46,6 +59,14 @@ export default class App extends Component {
       window.cancelAnimationFrame(this._animationFrame);
     }
   }
+
+  hurrySliderChange = (event, hurryValue) => {
+    this.setState({ hurryValue });
+  };
+
+  flowSliderChange = (event, flowValue) => {
+    this.setState({ flowValue });
+  };
 
   _animate() {
     const {
@@ -161,25 +182,54 @@ export default class App extends Component {
   }
 
   render() {
-    const {viewState, controller = true, baseMap = true} = this.props;
+    const {viewState, controller = true, baseMap = true } = this.props;
+    const { hurryValue, flowValue } = this.state;
 
     return (
-      <DeckGL
-        layers={this._renderLayers()}
-        initialViewState={INITIAL_VIEW_STATE}
-        viewState={viewState}
-        controller={controller}
-      >
-        {baseMap && (
-          <StaticMap
-            reuseMaps
-            mapStyle='mapbox://styles/jessiezh/cjsq7mefu006m1fs38j8jiyjg'
-            // mapStyle="mapbox://styles/mapbox/dark-v9"
-            preventStyleDiffing={true}
-            mapboxApiAccessToken={MAPBOX_TOKEN}
-          />
-        )}
-      </DeckGL>
+      <div>
+        <div className="simulation">
+          <DeckGL
+            layers={this._renderLayers()}
+            initialViewState={INITIAL_VIEW_STATE}
+            viewState={viewState}
+            controller={controller}
+          >
+            {baseMap && (
+              <StaticMap
+                reuseMaps
+                mapStyle='mapbox://styles/jessiezh/cjsq7mefu006m1fs38j8jiyjg'
+                // mapStyle="mapbox://styles/mapbox/dark-v9"
+                preventStyleDiffing={true}
+                mapboxApiAccessToken={MAPBOX_TOKEN}
+              />
+            )}
+          </DeckGL>
+        </div>
+        <div className="graph">
+          <span className="text_flow_left">Smaller</span>
+          <div className="slider_container_flow">
+            <MuiThemeProvider theme={theme}>
+              <Slider
+                className="slider_flow"
+                value={flowValue}
+                onChange={this.flowSliderChange}
+              />
+            </MuiThemeProvider>
+          </div>
+          <span className="text_flow_right">Larger Pedestrian Flow</span>
+          <span className="text_hurry_left">Fewer</span>
+          <div className="slider_container_hurry">
+            <MuiThemeProvider theme={theme}>
+              <Slider
+                className="slider_hurry"
+                value={hurryValue}
+                onChange={this.hurrySliderChange}
+              />
+            </MuiThemeProvider>
+          </div>
+          <span className="text_hurry_right">More are Hurrying up</span>
+        </div>
+      </div>
     );
   }
 }

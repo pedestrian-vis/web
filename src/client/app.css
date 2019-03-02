@@ -1,0 +1,68 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.simulation {
+    position: absolute;
+    left: 0;
+    top: 0%;
+    width: 60%;
+    height: 100%;
+}
+
+.graph {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 40%;
+    height: 100%;
+    background-color: rgb(29, 29, 29);
+    border-left-style: solid;
+    border-left-color: rgb(141, 141, 141);
+    border-left-width: 1px;
+}
+
+.slider_container_hurry {
+    width: 48%;
+    position: relative;
+    top: 48px;
+    left: 19%;
+}
+
+.slider_container_flow {
+    width: 48%;
+    position: relative;
+    top: 28px;
+    left: 19%;
+}
+
+.text_hurry_left {
+    position: absolute;
+    top: 38px;
+    left: 8%;
+    color: rgb(253, 128, 93);
+    font-size: 0.9em;
+}
+
+.text_hurry_right {
+    position: absolute;
+    top: 38px;
+    right: 7%;
+    color: rgb(253, 128, 93);
+    font-size: 0.9em;
+}
+.text_flow_left {
+    position: absolute;
+    top: 18px;
+    left: 8%;
+    color: rgb(253, 128, 93);
+    font-size: 0.9em;
+}
+
+.text_flow_right {
+    position: absolute;
+    top: 18px;
+    right: 7%;
+    color: rgb(253, 128, 93);
+    font-size: 0.9em;
+}
