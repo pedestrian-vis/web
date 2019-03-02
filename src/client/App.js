@@ -206,28 +206,28 @@ export default class App extends Component {
           </DeckGL>
         </div>
         <div className="graph">
-          <span className="text_flow_left">Smaller</span>
-          <div className="slider_container_flow">
-            <MuiThemeProvider theme={theme}>
-              <Slider
-                className="slider_flow"
-                value={flowValue}
-                onChange={this.flowSliderChange}
-              />
-            </MuiThemeProvider>
-          </div>
-          <span className="text_flow_right">Larger Pedestrian Flow</span>
-          <span className="text_hurry_left">Fewer</span>
-          <div className="slider_container_hurry">
-            <MuiThemeProvider theme={theme}>
-              <Slider
-                className="slider_hurry"
-                value={hurryValue}
-                onChange={this.hurrySliderChange}
-              />
-            </MuiThemeProvider>
-          </div>
-          <span className="text_hurry_right">More are Hurrying up</span>
+          <div className="sliders">
+            <span className="text_flow_left">Smaller</span>
+            <div className="slider_container_flow">
+              <MuiThemeProvider theme={theme}>
+                <Slider
+                  value={flowValue}
+                  onChange={this.flowSliderChange}
+                />
+              </MuiThemeProvider>
+            </div>
+            <span className="text_flow_right">Larger Pedestrian Flow</span>
+            <span className="text_hurry_left">Fewer</span>
+            <div className="slider_container_hurry">
+              <MuiThemeProvider theme={theme}>
+                <Slider
+                  value={hurryValue}
+                  onChange={this.hurrySliderChange}
+                />
+              </MuiThemeProvider>
+            </div>
+            <span className="text_hurry_right">More are Hurrying up</span>
+            </div>
         </div>
       </div>
     );
