@@ -25,11 +25,13 @@ document.addEventListener('contextmenu', evt => evt.preventDefault()); // give w
 
 /* Kungsgatan view */
 export const INITIAL_VIEW_STATE = {
-  longitude: 18.06360,
-  latitude: 59.335512,
-  zoom: 18.97,
+  longitude: 18.063810,
+  latitude: 59.335342,
+  zoom: 19.8,
   maxZoom: 21.3,
-  minZoom: 18.5
+  minZoom: 19,
+  bearing: 120,
+  pitch: 35
 };
 
 /* Override material-ui theme color */
@@ -118,7 +120,7 @@ export default class App extends Component {
         wireframe: true,
         getPolygon: d => d.polygon,
         getElevation: d => d.height,
-        getFillColor: [255, 255, 255, 40],
+        getFillColor: [255, 255, 255, 10],
         getLineColor: [255, 255, 255, 75]
       }),
       new PathLayer({
@@ -187,7 +189,7 @@ export default class App extends Component {
 
     return (
       <div>
-        <div className="simulation">
+        <div className="left_simulation">
           <DeckGL
             layers={this._renderLayers()}
             initialViewState={INITIAL_VIEW_STATE}
@@ -205,7 +207,10 @@ export default class App extends Component {
             )}
           </DeckGL>
         </div>
-        <div className="graph">
+        <div className="left_graph">
+          Overall statistics goes here
+        </div>
+        <div className="right_graph">
           <div className="sliders">
             <span className="text_flow_left">Smaller</span>
             <div className="slider_container_flow">
