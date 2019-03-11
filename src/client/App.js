@@ -72,7 +72,7 @@ export default class App extends Component {
 
   _animate() {
     const {
-      loopLength = 2250, // 30 represents 1s, so red 2250, whole cycle 3000
+      loopLength = 3000, // 30 represents 1s, so red 2250, whole cycle 3000
       animationSpeed = 30 // unit time per second
     } = this.props;
     const timestamp = Date.now() / 1000;
@@ -85,6 +85,7 @@ export default class App extends Component {
   }
 
   _renderLayers() {
+    const { time } = this.state;
     return [
       new ScatterplotLayer({
         id: 'pedestrians',
@@ -93,7 +94,7 @@ export default class App extends Component {
         fp64: true,
         getPosition: (d) => {
           for (let i = 0; i < d.trajactory.length; i += 1) {
-            if (d.trajactory[i][2] === Math.floor(this.state.time)) {
+            if (d.trajactory[i][2] === Math.floor(time)) {
               return [d.trajactory[i][0], d.trajactory[i][1], 0];
             }
           }
@@ -101,7 +102,7 @@ export default class App extends Component {
         getRadius: 0.27,
         getColor: [253, 128, 93],
         updateTriggers: {
-          getPosition: this.state.time
+          getPosition: time
         }
       }),
       new TripsLayer({
@@ -111,7 +112,7 @@ export default class App extends Component {
         getColor: d => (d.violation === 0 ? [253, 128, 93] : [23, 184, 190]),
         opacity: 1.0,
         trailLength: 30,
-        currentTime: this.state.time
+        currentTime: time
       }),
       new PolygonLayer({
         id: 'buildings',
@@ -158,8 +159,21 @@ export default class App extends Component {
         wireframe: true,
         getPolygon: d => d.contour,
         getElevation: 0.7,
-        getFillColor: d => (d.green === 1 ? [18, 131, 18, 120] : [255, 0, 0, 120]),
-        getLineColor: [255, 255, 255, 70]
+        getLineColor: [255, 255, 255, 70],
+        getFillColor: () => {
+          let color = null;
+          if (time < 20) {
+            color = [18, 131, 18, 120]; // green
+          } else if (time < 2250) {
+            color = [255, 0, 0, 120]; // red
+          } else {
+            color = [18, 131, 18, 120]; // green
+          }
+          return color;
+        },
+        updateTriggers: {
+          getFillColor: time
+        }
       }),
       new PathLayer({
         id: 'vehicles',
@@ -167,7 +181,7 @@ export default class App extends Component {
         fp64: false,
         getPath: (d) => {
           for (let i = 0; i < d.vertices.length; i += 1) {
-            if (d.vertices[i][2] === Math.floor(this.state.time)) {
+            if (d.vertices[i][2] === Math.floor(time)) {
               return [d.vertices[i][0], d.vertices[i][1]];
             }
           }
@@ -177,7 +191,7 @@ export default class App extends Component {
         getColor: [253, 128, 93],
         getWidth: 2.4,
         updateTriggers: {
-          getPath: this.state.time
+          getPath: time
         }
       })
     ];
