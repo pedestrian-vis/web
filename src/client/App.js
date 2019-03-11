@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 import { StaticMap } from 'react-map-gl';
 import DeckGL, { PolygonLayer, PathLayer, ScatterplotLayer } from 'deck.gl';
 import { TripsLayer } from '@deck.gl/experimental-layers';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import Slider from '@material-ui/lab/Slider';
 import './app.css';
 
 import DataBuildings from './data/buildings.json';
@@ -34,14 +32,6 @@ export const INITIAL_VIEW_STATE = {
   pitch: 35
 };
 
-/* Override material-ui theme color */
-const theme = createMuiTheme({
-  palette: {
-    primary: { main: 'rgb(253, 128, 93)' },
-  },
-  typography: { useNextVariants: true },
-});
-
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -62,17 +52,9 @@ export default class App extends Component {
     }
   }
 
-  hurrySliderChange = (event, hurryValue) => {
-    this.setState({ hurryValue });
-  };
-
-  flowSliderChange = (event, flowValue) => {
-    this.setState({ flowValue });
-  };
-
   _animate() {
     const {
-      loopLength = 3000, // 30 represents 1s, so red 2250, whole cycle 3000
+      loopLength = 2550, // red 2250 (1800 acclerated), whole cycle 3000 (2550 acclerated)
       animationSpeed = 30 // unit time per second
     } = this.props;
     const timestamp = Date.now() / 1000;
@@ -164,7 +146,7 @@ export default class App extends Component {
           let color = null;
           if (time < 20) {
             color = [18, 131, 18, 120]; // green
-          } else if (time < 2250) {
+          } else if (time < 1800) {
             color = [255, 0, 0, 120]; // red
           } else {
             color = [18, 131, 18, 120]; // green
@@ -199,7 +181,15 @@ export default class App extends Component {
 
   render() {
     const {viewState, controller = true, baseMap = true } = this.props;
-    const { hurryValue, flowValue } = this.state;
+    const { time } = this.state;
+
+    // display time acclerates the 20s of 30-50s into 5 seconds
+    let displayTime = Math.floor(time / 30);
+    if (time > 900 && time < 1050) {
+      displayTime = Math.floor(time / 7.5) - 90;
+    } else if (time >= 1050) {
+      displayTime = Math.floor(time / 30) + 15;
+    }
 
     return (
       <div>
@@ -225,28 +215,11 @@ export default class App extends Component {
           Overall statistics goes here
         </div>
         <div className="right_graph">
-          <div className="sliders">
-            <span className="text_flow_left">Smaller</span>
-            <div className="slider_container_flow">
-              <MuiThemeProvider theme={theme}>
-                <Slider
-                  value={flowValue}
-                  onChange={this.flowSliderChange}
-                />
-              </MuiThemeProvider>
-            </div>
-            <span className="text_flow_right">Larger Pedestrian Flow</span>
-            <span className="text_hurry_left">Fewer</span>
-            <div className="slider_container_hurry">
-              <MuiThemeProvider theme={theme}>
-                <Slider
-                  value={hurryValue}
-                  onChange={this.hurrySliderChange}
-                />
-              </MuiThemeProvider>
-            </div>
-            <span className="text_hurry_right">More are Hurrying up</span>
-          </div>
+          Some other graphs
+        </div>
+        <div className="timer">
+          {displayTime}
+          <span className="second">s</span>
         </div>
       </div>
     );

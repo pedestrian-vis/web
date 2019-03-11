@@ -31,52 +31,15 @@ body {
     border-left-width: 1px;
 }
 
-.sliders {
-    position: relative;
-    top: 24px;
-}
-
-.slider_container_hurry {
-    width: 48%;
-    position: relative;
-    top: 48px;
-    left: 19%;
-}
-
-.slider_container_flow {
-    width: 48%;
-    position: relative;
-    top: 28px;
-    left: 19%;
-}
-
-.text_hurry_left {
+.timer {
     position: absolute;
-    top: 38px;
-    left: 8%;
-    color: rgb(253, 128, 93);
-    font-size: 0.9em;
+    top: 6px;
+    left: 8px;
+    width: 36px;
+    color: rgba(255,255,255,0.5)
 }
 
-.text_hurry_right {
+.second {
     position: absolute;
-    top: 38px;
-    right: 7%;
-    color: rgb(253, 128, 93);
-    font-size: 0.9em;
-}
-.text_flow_left {
-    position: absolute;
-    top: 18px;
-    left: 8%;
-    color: rgb(253, 128, 93);
-    font-size: 0.9em;
-}
-
-.text_flow_right {
-    position: absolute;
-    top: 18px;
-    right: 7%;
-    color: rgb(253, 128, 93);
-    font-size: 0.9em;
+    left: 22px;
 }
