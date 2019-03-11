@@ -31,12 +31,20 @@ body {
     border-left-width: 1px;
 }
 
-.timer {
+.timer_nom {
     position: absolute;
     top: 6px;
     left: 8px;
     width: 36px;
     color: rgba(255,255,255,0.5)
+}
+
+.timer_acc {
+    position: absolute;
+    top: 6px;
+    left: 8px;
+    width: 36px;
+    color: rgb(250, 70, 70);
 }
 
 .second {

@@ -217,7 +217,7 @@ export default class App extends Component {
         <div className="right_graph">
           Some other graphs
         </div>
-        <div className="timer">
+        <div className={time > 900 && time < 1050 ? 'timer_acc' : 'timer_nom'}>
           {displayTime}
           <span className="second">s</span>
         </div>
