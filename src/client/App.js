@@ -29,7 +29,7 @@ export const INITIAL_VIEW_STATE = {
   latitude: 59.335342,
   zoom: 19.8,
   maxZoom: 21.3,
-  minZoom: 19,
+  minZoom: 17,
   bearing: 120,
   pitch: 35
 };
@@ -72,7 +72,7 @@ export default class App extends Component {
 
   _animate() {
     const {
-      loopLength = 300, // unit corresponds to the timestamp in source data
+      loopLength = 2250, // 30 represents 1s, so red 2250, whole cycle 3000
       animationSpeed = 30 // unit time per second
     } = this.props;
     const timestamp = Date.now() / 1000;
@@ -172,7 +172,7 @@ export default class App extends Component {
             }
           }
         },
-        opacity: 0.003,
+        opacity: 0.008,
         positionFormat: `XY`,
         getColor: [253, 128, 93],
         getWidth: 2.4,
@@ -232,7 +232,7 @@ export default class App extends Component {
               </MuiThemeProvider>
             </div>
             <span className="text_hurry_right">More are Hurrying up</span>
-            </div>
+          </div>
         </div>
       </div>
     );
