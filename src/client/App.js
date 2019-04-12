@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { StaticMap } from 'react-map-gl';
 import DeckGL, { PolygonLayer, PathLayer, ScatterplotLayer } from 'deck.gl';
-// import { TripsLayer } from '@deck.gl/experimental-layers';
 import './app.css';
 
 import DataBuildings from './data/buildings.json';
@@ -12,8 +11,6 @@ import DataZebras from './data/env_zebras.json';
 import DataLanes from './data/env_lanes.json';
 import DataBuffer from './data/env_buffer.json';
 import DataLights from './data/env_lights.json';
-
-// import TEST from './data/test.json';
 
 // // Not mine
 // const MAPBOX_TOKEN = 'pk.eyJ1IjoidWJlcmRhdGEiLCJhIjoiY2pudzRtaWloMDAzcTN2bzN1aXdxZHB5bSJ9.2bkj3IiRC8wj3jLThvDGdA';
@@ -25,12 +22,11 @@ document.addEventListener('contextmenu', evt => evt.preventDefault()); // give w
 
 /* Kungsgatan view */
 export const INITIAL_VIEW_STATE = {
-  longitude: 18.063810,
-  latitude: 59.335342,
-  // zoom: 19.8,
-  zoom: 19,
+  longitude: 18.063798,
+  latitude: 59.335350,
+  zoom: 19.5,
   maxZoom: 21.3,
-  // minZoom: 17,
+  minZoom: 17,
   bearing: 120,
   pitch: 35
 };
@@ -88,25 +84,6 @@ export default class App extends Component {
           getPosition: time
         }
       }),
-      // new ScatterplotLayer({
-      //   id: 'test',
-      //   data: TEST,
-      //   opacity: 0.001,
-      //   fp64: true,
-      //   getPosition: d => d.coordinates,
-      //   getRadius: 0.27,
-      //   getColor: [253, 0, 0]
-      // }),
-      // new TripsLayer({
-      //   id: 'pedestrian_path',
-      //   data: DataPedestrians,
-      //   getPath: d => d.trajectory,
-      //   // getColor: d => (d.violation === 0 ? [253, 128, 93] : [23, 184, 190]),
-      //   getColor: [253, 128, 93],
-      //   opacity: 1.0,
-      //   trailLength: 30,
-      //   currentTime: time
-      // }),
       new PathLayer({
         id: 'env_zebras',
         data: DataZebras,
