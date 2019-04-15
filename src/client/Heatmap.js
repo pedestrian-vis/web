@@ -1,13 +1,12 @@
 import React from 'react';
 import { Group } from '@vx/group';
-import { genBins } from '@vx/mock-data';
 import { scaleLinear } from '@vx/scale';
 import { HeatmapRect } from '@vx/heatmap';
+import HeatmapData from './data/utilization.json';
 
 const hot1 = 'rgb(247, 116, 79)';
 const hot2 = 'rgb(29, 29, 29)';
-
-const data = genBins(32, 16);
+const data = HeatmapData;
 
 // utils
 const max = (data, value = d => d) => Math.max(...data.map(value));
