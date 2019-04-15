@@ -42,6 +42,12 @@ body {
     left: 40px;
 }
 
+.heatmap {
+    position: absolute;
+    left: 40px;
+    top: 100px;
+}
+
 .timer_nom {
     position: absolute;
     top: 6px;

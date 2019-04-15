@@ -14,6 +14,7 @@ import DataLights from './data/env_lights.json';
 
 import FlowChart from './FlowChart';
 import CrossingChart from './CrossingChart';
+import Heatmap from './Heatmap';
 
 // // Not mine
 // const MAPBOX_TOKEN = 'pk.eyJ1IjoidWJlcmRhdGEiLCJhIjoiY2pudzRtaWloMDAzcTN2bzN1aXdxZHB5bSJ9.2bkj3IiRC8wj3jLThvDGdA';
@@ -207,6 +208,7 @@ export default class App extends Component {
         </div>
         <div className="right_graph">
           <div className="area_cross_time"><CrossingChart /></div>
+          <div className="heatmap"><Heatmap /></div>
         </div>
         <div className={time > 900 && time < 1050 ? 'timer_acc' : 'timer_nom'}>
           {displayTime}
