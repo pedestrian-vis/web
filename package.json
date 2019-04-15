@@ -13,12 +13,20 @@
   },
   "author": "Jiaqi Zheng",
   "dependencies": {
-    "@deck.gl/experimental-layers": "^6.3.6",
+    "@nivo/line": "^0.55.0",
+    "@vx/curve": "0.0.182",
+    "@vx/event": "0.0.182",
+    "@vx/grid": "0.0.184",
+    "@vx/scale": "0.0.182",
+    "@vx/shape": "0.0.184",
+    "@vx/tooltip": "0.0.184",
     "babel-polyfill": "^6.26.0",
+    "d3-array": "^2.0.3",
+    "d3-time-format": "^2.1.3",
     "deck.gl": "^6.3.6",
     "express": "^4.16.3",
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "react-map-gl": "^4.0.7"
   },
   "devDependencies": {

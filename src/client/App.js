@@ -12,6 +12,9 @@ import DataLanes from './data/env_lanes.json';
 import DataBuffer from './data/env_buffer.json';
 import DataLights from './data/env_lights.json';
 
+import FlowChart from './FlowChart.js';
+// import Areas from './FlowChart';
+
 // // Not mine
 // const MAPBOX_TOKEN = 'pk.eyJ1IjoidWJlcmRhdGEiLCJhIjoiY2pudzRtaWloMDAzcTN2bzN1aXdxZHB5bSJ9.2bkj3IiRC8wj3jLThvDGdA';
 
@@ -200,7 +203,7 @@ export default class App extends Component {
           </DeckGL>
         </div>
         <div className="left_graph">
-          Overall statistics goes here
+          <div className="area_illegal_flow"><FlowChart /></div>
         </div>
         <div className="right_graph">
           Some other graphs
