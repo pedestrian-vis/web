@@ -46,7 +46,7 @@ class Area extends React.Component {
   }
   render() {
     const {
-      width=600,
+      width=720,
       height=100,
       margin={
         top: 0,
@@ -80,7 +80,7 @@ class Area extends React.Component {
     return (
       <div>
         <svg ref={s => (this.svg = s)} width={width} height={height}>
-          <rect x={0} y={0} width={width} height={height} opacity={0} />
+          <rect x={0} y={0} width={width} height={height} opacity={0}/>
           <defs>
             <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stopColor="rgb(253, 128, 93)" stopOpacity={0.6} />

@@ -12,8 +12,8 @@ import DataLanes from './data/env_lanes.json';
 import DataBuffer from './data/env_buffer.json';
 import DataLights from './data/env_lights.json';
 
-import FlowChart from './FlowChart.js';
-// import Areas from './FlowChart';
+import FlowChart from './FlowChart';
+import CrossingChart from './CrossingChart';
 
 // // Not mine
 // const MAPBOX_TOKEN = 'pk.eyJ1IjoidWJlcmRhdGEiLCJhIjoiY2pudzRtaWloMDAzcTN2bzN1aXdxZHB5bSJ9.2bkj3IiRC8wj3jLThvDGdA';
@@ -206,7 +206,7 @@ export default class App extends Component {
           <div className="area_illegal_flow"><FlowChart /></div>
         </div>
         <div className="right_graph">
-          Some other graphs
+          <div className="area_cross_time"><CrossingChart /></div>
         </div>
         <div className={time > 900 && time < 1050 ? 'timer_acc' : 'timer_nom'}>
           {displayTime}
