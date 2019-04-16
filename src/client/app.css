@@ -42,10 +42,22 @@ body {
     left: 40px;
 }
 
+.heatmap_container {
+    position: relative;
+    width: 85%;
+    height: 80%;
+    top: 48px;
+    left: 64px;
+    background-image: url("./img/utilization_back.png");
+    background-size: 654px 512px;  /* original 908px 711px */
+    background-repeat: no-repeat;
+}
+
 .heatmap {
-    position: absolute;
-    left: 40px;
-    top: 100px;
+    position: relative;
+    top: -13px;
+    left: 35px;
+    opacity: 1;
 }
 
 .timer_nom {

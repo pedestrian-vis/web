@@ -4,8 +4,8 @@ import { scaleLinear } from '@vx/scale';
 import { HeatmapRect } from '@vx/heatmap';
 import HeatmapData from './data/utilization.json';
 
-const hot1 = 'rgb(247, 116, 79)';
-const hot2 = 'rgb(29, 29, 29)';
+const hot1 = 'rgb(29, 29, 29)';
+const hot2 = 'rgb(247, 116, 79)';
 const data = HeatmapData;
 
 // utils
@@ -36,8 +36,8 @@ const opacityScale = scaleLinear({
 });
 
 export default ({
-  width = 800, // change this to make horizontal grip gap fit
-  height = 500,
+  width = 584, // change this to make horizontal grip gap fit
+  height = 583,
   margin = {
     top: 10,
     left: 20,
