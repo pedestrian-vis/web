@@ -8,7 +8,7 @@ import { localPoint } from '@vx/event';
 import { bisector } from 'd3-array';
 import { timeFormat } from 'd3-time-format';
 
-import FlowData from './data/FlowData';
+import FlowData from './data/statistics_flow.json';
 const stock = FlowData;
 
 // util
