@@ -31,7 +31,7 @@ const rectColorScale = scaleLinear({
   domain: [0, colorMax]
 });
 const opacityScale = scaleLinear({
-  range: [0.8, 0.8],
+  range: [0.9, 0.9],
   domain: [0, colorMax]
 });
 
