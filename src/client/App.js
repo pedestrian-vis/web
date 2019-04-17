@@ -14,6 +14,9 @@ import FlowChart from './FlowChart';
 import CrossingChart from './CrossingChart';
 import Heatmap from './Heatmap';
 
+// help testing
+// import TESTDATA from './data/pedestrians.json';
+
 document.addEventListener('contextmenu', evt => evt.preventDefault()); // give way to perspective control
 const MAPBOX_TOKEN = 'pk.eyJ1IjoiamVzc2llemgiLCJhIjoiY2pxeG5yNHhqMDBuZzN4cHA4ZGNwY2l3OCJ9.T2B6-B6EMW6u9XmjO4pNKw';
 
@@ -26,7 +29,7 @@ const TRAJECTORY_URL = {
 export const INITIAL_VIEW_STATE = {
   longitude: 18.063798,
   latitude: 59.335350,
-  zoom: 19.5,
+  zoom: 19.68,
   maxZoom: 21.3,
   minZoom: 17,
   bearing: 120,
@@ -71,6 +74,7 @@ export default class App extends Component {
       new ScatterplotLayer({
         id: 'pedestrians',
         data: TRAJECTORY_URL.FLOW_150,
+        // data: TESTDATA,
         opacity: 0.8,
         fp64: true,
         getPosition: (d) => {
@@ -194,7 +198,6 @@ export default class App extends Component {
               <StaticMap
                 reuseMaps
                 mapStyle='mapbox://styles/jessiezh/cjsq7mefu006m1fs38j8jiyjg'
-                // mapStyle="mapbox://styles/mapbox/dark-v9"
                 preventStyleDiffing={true}
                 mapboxApiAccessToken={MAPBOX_TOKEN}
               />
@@ -204,9 +207,11 @@ export default class App extends Component {
         <div className="left_graph">
           <div className="area_illegal_flow"><FlowChart /></div>
         </div>
-        <div className="right_graph">
-          <div className="area_cross_time"><CrossingChart /></div>
+        <div className="right_top_graph">
           <div className="heatmap_container"><div className="heatmap"><Heatmap /></div></div>
+        </div>
+        <div className="right_bottom_graph">
+          <div className="area_cross_time"><CrossingChart /></div>
         </div>
         <div className={time > 900 && time < 1050 ? 'timer_acc' : 'timer_nom'}>
           {displayTime}

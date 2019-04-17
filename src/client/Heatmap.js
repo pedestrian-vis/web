@@ -36,13 +36,13 @@ const opacityScale = scaleLinear({
 });
 
 export default ({
-  width = 584, // change this to make horizontal grip gap fit
-  height = 583,
+  width = 437,
+  height = 418,
   margin = {
-    top: 10,
-    left: 20,
-    right: 20,
-    bottom: 110
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0
   }
 }) => {
   // bounds
@@ -73,7 +73,7 @@ export default ({
           opacityScale={opacityScale}
           binWidth={binWidth}
           binHeight={binWidth}
-          gap={1.5}
+          gap={3}
         >
           {heatmap => {
             return heatmap.map(bins => {

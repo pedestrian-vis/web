@@ -46,7 +46,7 @@ class Area extends React.Component {
   }
   render() {
     const {
-      width=600,
+      width=700,
       height=100,
       margin={
         top: 0,

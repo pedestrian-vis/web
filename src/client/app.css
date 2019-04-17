@@ -6,7 +6,7 @@ body {
     position: absolute;
     left: 0;
     top: 0%;
-    width: 45%;
+    width: 55%;
     height: 75%;
 }
 
@@ -15,48 +15,64 @@ body {
     left: 0;
     top: 75%;
     height: 25%;
-    width: 45%;
+    width: 55%;
     background-color: black;
+    border-top-style: solid;
+    border-top-color: rgb(141, 141, 141);
+    border-top-width: 1px;
 }
 
-.right_graph {
+.right_top_graph {
     position: absolute;
     right: 0;
     top: 0;
-    width: 55%;
-    height: 100%;
+    width: 45%;
+    height: 75%;
     background-color: rgb(29, 29, 29);
     border-left-style: solid;
     border-left-color: rgb(141, 141, 141);
     border-left-width: 1px;
 }
 
+.right_bottom_graph {
+    position: absolute;
+    right: 0;
+    top: 75%;
+    width: 45%;
+    height: 25%;
+    background-color: black;
+    border-top-style: solid;
+    border-top-color: rgb(141, 141, 141);
+    border-top-width: 1px;
+}
+
 .area_illegal_flow {
-    position: relative;
-    padding: 50px 0 0 25px;
+    position: absolute;
+    bottom: 36px;
+    right: 48px;
 }
 
 .area_cross_time {
     position: absolute;
-    bottom: 42px;
+    bottom: 36px;
     left: 40px;
 }
 
 .heatmap_container {
     position: relative;
-    width: 85%;
+    width: 90%;
     height: 80%;
-    top: 48px;
-    left: 64px;
+    top: 70px;
+    left: 44px;
     background-image: url("./img/utilization_back.png");
-    background-size: 654px 512px;  /* original 908px 711px */
+    background-size: 567px 444px;  /* original 908px 711px */
     background-repeat: no-repeat;
 }
 
 .heatmap {
     position: relative;
-    top: -13px;
-    left: 35px;
+    top: -3px;
+    left: 68px;
     opacity: 1;
 }
 
@@ -83,7 +99,7 @@ body {
 
 .light_outline {
     position: absolute;
-    left: 42.2%;
+    left: 52.2%;
     top: 1%; 
     background-color:rgb(0, 0, 0);
     width: 30px;
