@@ -1,11 +1,9 @@
-/* global window */
 import React, { Component } from 'react';
 import { StaticMap } from 'react-map-gl';
 import DeckGL, { PolygonLayer, PathLayer, ScatterplotLayer } from 'deck.gl';
 import './app.css';
 
 import DataBuildings from './data/buildings.json';
-import DataPedestrians from './data/pedestrians.json';
 import DataVehicles from './data/vehicles.json';
 import DataZebras from './data/env_zebras.json';
 import DataLanes from './data/env_lanes.json';
@@ -16,13 +14,13 @@ import FlowChart from './FlowChart';
 import CrossingChart from './CrossingChart';
 import Heatmap from './Heatmap';
 
-// // Not mine
-// const MAPBOX_TOKEN = 'pk.eyJ1IjoidWJlcmRhdGEiLCJhIjoiY2pudzRtaWloMDAzcTN2bzN1aXdxZHB5bSJ9.2bkj3IiRC8wj3jLThvDGdA';
-
-// My token, enable when using my mapbox style
+document.addEventListener('contextmenu', evt => evt.preventDefault()); // give way to perspective control
 const MAPBOX_TOKEN = 'pk.eyJ1IjoiamVzc2llemgiLCJhIjoiY2pxeG5yNHhqMDBuZzN4cHA4ZGNwY2l3OCJ9.T2B6-B6EMW6u9XmjO4pNKw';
 
-document.addEventListener('contextmenu', evt => evt.preventDefault()); // give way to perspective control
+const TRAJECTORY_URL = {
+  FLOW_150:
+    'https://raw.githubusercontent.com/pedestrian-vis/data_processing/master/trajectories/pedestrians_150.json'
+};
 
 /* Kungsgatan view */
 export const INITIAL_VIEW_STATE = {
@@ -72,7 +70,7 @@ export default class App extends Component {
     return [
       new ScatterplotLayer({
         id: 'pedestrians',
-        data: DataPedestrians,
+        data: TRAJECTORY_URL.FLOW_150,
         opacity: 0.8,
         fp64: true,
         getPosition: (d) => {
