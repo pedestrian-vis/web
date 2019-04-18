@@ -2,6 +2,7 @@ import React from 'react';
 import { Group } from '@vx/group';
 import { scaleLinear } from '@vx/scale';
 import { HeatmapRect } from '@vx/heatmap';
+import { withTooltip, Tooltip } from '@vx/tooltip';
 import HeatmapData from './data/utilization.json';
 
 const hot1 = 'rgb(29, 29, 29)';
@@ -42,7 +43,7 @@ export default ({
     top: 0,
     left: 0,
     right: 0,
-    bottom: 0
+    bottom: 30
   }
 }) => {
   // bounds

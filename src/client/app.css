@@ -67,6 +67,7 @@ body {
     background-image: url("./img/utilization_back.png");
     background-size: 567px 444px;  /* original 908px 711px */
     background-repeat: no-repeat;
+    overflow-x: hidden;
 }
 
 .heatmap {
