@@ -12,7 +12,8 @@ import DataLights from './data/env_lights.json';
 
 import FlowChart from './FlowChart';
 import CrossingChart from './CrossingChart';
-import Heatmap from './Heatmap';
+import HeatmapMain from './HeatmapMain';
+import HeatmapBuffer from './HeatmapBuffer';
 
 // help testing
 // import TESTDATA from './data/pedestrians.json';
@@ -208,7 +209,10 @@ export default class App extends Component {
           <div className="area_illegal_flow"><FlowChart /></div>
         </div>
         <div className="right_top_graph">
-          <div className="heatmap_container"><div className="heatmap"><Heatmap /></div></div>
+          <div className="heatmap_container">
+            <div className="heatmap_main"><HeatmapMain /></div>
+            <div className="heatmap_buf"><HeatmapBuffer /></div>
+          </div>
         </div>
         <div className="right_bottom_graph">
           <div className="area_cross_time"><CrossingChart /></div>
@@ -218,7 +222,8 @@ export default class App extends Component {
           <span className="second">s</span>
         </div>
         <div className="light_outline">
-          <span className={time < 1800 ? 'light_red' : 'light_green'} />
+          <span className={time < 1800 ? 'light_red_on' : 'light_red_off'} />
+          <span className={time < 1800 ? 'light_green_off' : 'light_green_on'} />
         </div>
       </div>
     );

@@ -1,0 +1,79 @@
+[{
+    "bins": [{
+        "count": 40,
+        "type": "Buffer Zone"
+    }, {
+        "count": 1396,
+        "type": "Buffer Zone"
+    }, {
+        "count": 1364,
+        "type": "Buffer Zone"
+    }, {
+        "count": 1271,
+        "type": "Buffer Zone"
+    }, {
+        "count": 254,
+        "type": "Buffer Zone"
+    }, {
+        "count": 1280,
+        "type": "Buffer Zone"
+    }, {
+        "count": 1855,
+        "type": "Buffer Zone"
+    }, {
+        "count": 1363,
+        "type": "Buffer Zone"
+    }, {
+        "count": 2579,
+        "type": "Buffer Zone"
+    }, {
+        "count": 1251,
+        "type": "Buffer Zone"
+    }, {
+        "count": 202,
+        "type": "Buffer Zone"
+    }, {
+        "count": 151,
+        "type": "Buffer Zone"
+    }],
+    "column": 8
+}, {
+    "bins": [{
+        "count": 29,
+        "type": "Buffer Zone"
+    }, {
+        "count": 194,
+        "type": "Buffer Zone"
+    }, {
+        "count": 1972,
+        "type": "Buffer Zone"
+    }, {
+        "count": 1094,
+        "type": "Buffer Zone"
+    }, {
+        "count": 577,
+        "type": "Buffer Zone"
+    }, {
+        "count": 1908,
+        "type": "Buffer Zone"
+    }, {
+        "count": 2317,
+        "type": "Buffer Zone"
+    }, {
+        "count": 2034,
+        "type": "Buffer Zone"
+    }, {
+        "count": 2704,
+        "type": "Buffer Zone"
+    }, {
+        "count": 1378,
+        "type": "Buffer Zone"
+    }, {
+        "count": 1199,
+        "type": "Buffer Zone"
+    }, {
+        "count": 7,
+        "type": "Buffer Zone"
+    }],
+    "column": 9
+}]

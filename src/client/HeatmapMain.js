@@ -32,13 +32,13 @@ const rectColorScale = scaleLinear({
   domain: [0, colorMax]
 });
 const opacityScale = scaleLinear({
-  range: [0.9, 0.9],
+  range: [1.0, 1.0],
   domain: [0, colorMax]
 });
 
 export default ({
-  width = 437,
-  height = 418,
+  width = 430,
+  height = 366,
   margin = {
     top: 0,
     left: 0,
@@ -74,7 +74,7 @@ export default ({
           opacityScale={opacityScale}
           binWidth={binWidth}
           binHeight={binWidth}
-          gap={3}
+          gap={3.5}
         >
           {heatmap => {
             return heatmap.map(bins => {
