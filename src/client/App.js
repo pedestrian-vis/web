@@ -206,7 +206,7 @@ export default class App extends Component {
           </DeckGL>
         </div>
         <div className="left_graph">
-          <div className="area_illegal_flow"><FlowChart /></div>
+          <div className="area_cross_time"><CrossingChart /></div>
         </div>
         <div className="right_top_graph">
           <div className="heatmap_container">
@@ -215,7 +215,7 @@ export default class App extends Component {
           </div>
         </div>
         <div className="right_bottom_graph">
-          <div className="area_cross_time"><CrossingChart /></div>
+          <div className="area_illegal_flow"><FlowChart /></div>
         </div>
         <div className={time > 900 && time < 1050 ? 'timer_acc' : 'timer_nom'}>
           {displayTime}

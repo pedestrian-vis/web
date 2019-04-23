@@ -2,18 +2,16 @@ import React from 'react';
 import { AreaClosed, Line, LinePath, Bar } from '@vx/shape';
 import { curveMonotoneX } from '@vx/curve';
 import { GridRows, GridColumns } from '@vx/grid';
-import { scaleTime, scaleLinear } from '@vx/scale';
+import { scaleLinear } from '@vx/scale';
 import { AxisLeft, AxisRight, AxisBottom } from '@vx/axis';
 import { withTooltip, Tooltip } from '@vx/tooltip';
 import { localPoint } from '@vx/event';
 import { bisector } from 'd3-array';
-// import { timeFormat } from 'd3-time-format';
 
 import CrossingData from './data/statistics_crossing.json';
 const crossing = CrossingData;
 
 // util
-// const formatDate = timeFormat("%S");
 const min = (arr, fn) => Math.min(...arr.map(fn));
 const max = (arr, fn) => Math.max(...arr.map(fn));
 const extent = (arr, fn) => [min(arr, fn), max(arr, fn)];
@@ -48,7 +46,7 @@ class Area extends React.Component {
   render() {
     const {
       width=700,
-      height=120,
+      height=150,
       margin={
         top: 0,
         left: 0,
@@ -68,13 +66,14 @@ class Area extends React.Component {
     const yMax = height - margin.top - margin.bottom;
 
     // scales
-    const xScale = scaleTime({
+    const xScale = scaleLinear({
       range: [0, xMax],
-      domain: extent(crossing, xCrossing)
+      domain: extent(crossing, xCrossing),
+      nice: true
     });
     const yScale = scaleLinear({
       range: [yMax, 0],
-      domain: [0, max(crossing, yCrossing) + yMax / 3],
+      domain: [0, max(crossing, yCrossing) + yMax / 20],
       nice: true
     });
 
@@ -158,7 +157,7 @@ class Area extends React.Component {
             onMouseLeave={event => hideTooltip()}
           />
           <AxisBottom
-            top={80}
+            top={110}
             scale={xScale}
             stroke="#bcbaba"
             tickStroke="#bcbaba"
@@ -211,7 +210,7 @@ class Area extends React.Component {
                 color: 'white'
               }}
             >
-              {`$${yCrossing(tooltipData)}`}
+              {`${yCrossing(tooltipData)} in 4s`}
             </Tooltip>
             <Tooltip
               top={yMax - 14}

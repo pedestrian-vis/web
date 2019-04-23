@@ -48,13 +48,13 @@ body {
 
 .area_illegal_flow {
     position: absolute;
-    bottom: 24px;
+    bottom: 12px;
     right: 48px;
 }
 
 .area_cross_time {
     position: absolute;
-    bottom: 24px;
+    bottom: 12px;
     left: 40px;
 }
 
