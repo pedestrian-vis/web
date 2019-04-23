@@ -6,7 +6,7 @@ import { withTooltip, Tooltip } from '@vx/tooltip';
 import HeatmapData from './data/utilization_buf.json';
 
 const hot1 = 'rgb(29, 29, 29)';
-const hot2 = 'rgb(252, 160, 40)';
+const hot2 = 'rgb(247, 116, 79)';
 const data = HeatmapData;
 
 // utils
