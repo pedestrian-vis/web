@@ -1,33 +1,34 @@
 import React from 'react';
-import { AreaClosed, Line, Bar } from '@vx/shape';
+import { AreaClosed, Line, LinePath, Bar } from '@vx/shape';
 import { curveMonotoneX } from '@vx/curve';
 import { GridRows, GridColumns } from '@vx/grid';
 import { scaleTime, scaleLinear } from '@vx/scale';
+import { AxisLeft, AxisRight, AxisBottom } from '@vx/axis';
 import { withTooltip, Tooltip } from '@vx/tooltip';
 import { localPoint } from '@vx/event';
 import { bisector } from 'd3-array';
-import { timeFormat } from 'd3-time-format';
+// import { timeFormat } from 'd3-time-format';
 
-import FlowData from './data/statistics_flow.json';
-const stock = FlowData;
+import CrossingData from './data/statistics_crossing.json';
+const crossing = CrossingData;
 
 // util
-const formatDate = timeFormat("%b %d, '%y");
+// const formatDate = timeFormat("%S");
 const min = (arr, fn) => Math.min(...arr.map(fn));
 const max = (arr, fn) => Math.max(...arr.map(fn));
 const extent = (arr, fn) => [min(arr, fn), max(arr, fn)];
 
 // accessors
-const xStock = d => new Date(d.date);
-const yStock = d => d.close;
-const bisectDate = bisector(d => new Date(d.date)).left;
+const xCrossing = d => d.second;
+const yCrossing = d => d.crossings;
+const bisectDate = bisector(d => d.second).left;
 
 class Area extends React.Component {
   constructor(props) {
     super(props);
     this.handleTooltip = this.handleTooltip.bind(this);
   }
-  handleTooltip({ event, data, xStock, xScale, yScale }) {
+  handleTooltip({ event, data, xCrossing, xScale, yScale }) {
     const { showTooltip } = this.props;
     const { x } = localPoint(event);
     const x0 = xScale.invert(x);
@@ -35,24 +36,24 @@ class Area extends React.Component {
     const d0 = data[index - 1];
     const d1 = data[index];
     let d = d0;
-    if (d1 && d1.date) {
-      d = x0 - xStock(d0.date) > xStock(d1.date) - x0 ? d1 : d0;
+    if (d1 && d1.second) {
+      d = x0 - xCrossing(d0.second) > xCrossing(d1.second) - x0 ? d1 : d0;
     }
     showTooltip({
       tooltipData: d,
       tooltipLeft: x,
-      tooltipTop: yScale(d.close)
+      tooltipTop: yScale(d.crossings)
     });
   }
   render() {
     const {
-      width=580,
-      height=100,
+      width=700,
+      height=120,
       margin={
         top: 0,
         left: 0,
-        right: 0,
-        bottom: 0
+        right: 10,
+        bottom: 40
       },
       hideTooltip,
       tooltipData,
@@ -69,18 +70,18 @@ class Area extends React.Component {
     // scales
     const xScale = scaleTime({
       range: [0, xMax],
-      domain: extent(stock, xStock)
+      domain: extent(crossing, xCrossing)
     });
     const yScale = scaleLinear({
       range: [yMax, 0],
-      domain: [0, max(stock, yStock) + yMax / 3],
+      domain: [0, max(crossing, yCrossing) + yMax / 3],
       nice: true
     });
 
     return (
       <div>
         <svg ref={s => (this.svg = s)} width={width} height={height}>
-          <rect x={0} y={0} width={width} height={height} opacity={0}/>
+          <rect x={0} y={0} width={width} height={height} opacity={0} />
           <defs>
             <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stopColor="rgb(253, 128, 93)" stopOpacity={0.6} />
@@ -102,13 +103,21 @@ class Area extends React.Component {
             stroke="rgba(255,255,255,0.1)"
           />
           <AreaClosed
-            data={stock}
-            x={d => xScale(xStock(d))}
-            y={d => yScale(yStock(d))}
+            data={crossing}
+            x={d => xScale(xCrossing(d))}
+            y={d => yScale(yCrossing(d))}
             yScale={yScale}
-            strokeWidth={1}
+            strokeWidth={0}
             stroke={'url(#gradient)'}
             fill={'url(#gradient)'}
+            curve={curveMonotoneX}
+          />
+          <LinePath
+            data={crossing}
+            x={d => xScale(xCrossing(d))}
+            y={d => yScale(yCrossing(d))}
+            stroke="rgba(255,255,255,0.4)"
+            strokeWidth={1}
             curve={curveMonotoneX}
           />
           <Bar
@@ -118,35 +127,57 @@ class Area extends React.Component {
             height={height}
             fill="transparent"
             rx={14}
-            data={stock}
+            data={crossing}
             onTouchStart={event =>
               this.handleTooltip({
                 event,
-                xStock,
+                xCrossing,
                 xScale,
                 yScale,
-                data: stock
+                data: crossing
               })
             }
             onTouchMove={event =>
               this.handleTooltip({
                 event,
-                xStock,
+                xCrossing,
                 xScale,
                 yScale,
-                data: stock
+                data: crossing
               })
             }
             onMouseMove={event =>
               this.handleTooltip({
                 event,
-                xStock,
+                xCrossing,
                 xScale,
                 yScale,
-                data: stock
+                data: crossing
               })
             }
             onMouseLeave={event => hideTooltip()}
+          />
+          <AxisBottom
+            top={80}
+            scale={xScale}
+            stroke="#bcbaba"
+            tickStroke="#bcbaba"
+            label="Time (sec.) within a Signal Cycle"
+            labelProps={{
+              fill: '#bcbaba',
+              textAnchor: 'middle',
+              fontSize: 12,
+              fontFamily: 'Arial'
+            }}
+            tickStroke="#bcbaba"
+            tickLabelProps={(value, index) => ({
+              fill: '#bcbaba',
+              textAnchor: 'middle',
+              fontSize: 10,
+              fontFamily: 'Arial',
+              dx: '-0.25em',
+              dy: '0.25em'
+            })}
           />
           {tooltipData && (
             <g>
@@ -180,7 +211,7 @@ class Area extends React.Component {
                 color: 'white'
               }}
             >
-              {`$${yStock(tooltipData)}`}
+              {`$${yCrossing(tooltipData)}`}
             </Tooltip>
             <Tooltip
               top={yMax - 14}
@@ -189,7 +220,7 @@ class Area extends React.Component {
                 transform: 'translateX(-50%)'
               }}
             >
-              {formatDate(xStock(tooltipData))}
+              {`${xCrossing(tooltipData)} sec.`}
             </Tooltip>
           </div>
         )}
