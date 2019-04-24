@@ -3,7 +3,7 @@ import { AreaClosed, Line, LinePath, Bar } from '@vx/shape';
 import { curveMonotoneX } from '@vx/curve';
 import { GridRows, GridColumns } from '@vx/grid';
 import { scaleLinear } from '@vx/scale';
-import { AxisLeft, AxisRight, AxisBottom } from '@vx/axis';
+import { AxisBottom } from '@vx/axis';
 import { withTooltip, Tooltip } from '@vx/tooltip';
 import { localPoint } from '@vx/event';
 import { bisector } from 'd3-array';
@@ -82,9 +82,9 @@ class Area extends React.Component {
         <svg ref={s => (this.svg = s)} width={width} height={height}>
           <rect x={0} y={0} width={width} height={height} opacity={0} />
           <defs>
-            <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="rgb(253, 128, 93)" stopOpacity={0.6} />
-              <stop offset="100%" stopColor="rgb(253, 128, 93)" stopOpacity={0.2} />
+            <linearGradient id="gradient_cross" x1="74.9%" y1="0%" x2="75.1%" y2="0%">
+              <stop offset="0%" stopColor="rgb(253, 128, 93)" stopOpacity={0.5} />
+              <stop offset="100%" stopColor="rgb(104, 90, 16)" stopOpacity={0.7} />
             </linearGradient>
           </defs>
           <GridRows
@@ -107,8 +107,8 @@ class Area extends React.Component {
             y={d => yScale(yCrossing(d))}
             yScale={yScale}
             strokeWidth={0}
-            stroke={'url(#gradient)'}
-            fill={'url(#gradient)'}
+            stroke={'url(#gradient_cross)'}
+            fill={'url(#gradient_cross)'}
             curve={curveMonotoneX}
           />
           <LinePath
@@ -155,6 +155,14 @@ class Area extends React.Component {
               })
             }
             onMouseLeave={event => hideTooltip()}
+          />
+          <Line
+            from={{ x: 518, y: 30 }}
+            to={{ x: 518, y: 130 }}
+            stroke="rgba(247, 203, 190, 0.6)"
+            strokeWidth={1}
+            style={{ pointerEvents: 'none' }}
+            strokeDasharray="2,2"
           />
           <AxisBottom
             top={110}
@@ -203,17 +211,17 @@ class Area extends React.Component {
         {tooltipData && (
           <div>
             <Tooltip
-              top={tooltipTop - 12}
+              top={tooltipTop - 24}
               left={tooltipLeft + 12}
               style={{
                 backgroundColor: 'rgba(92, 119, 235, 1.000)',
                 color: 'white'
               }}
             >
-              {`${yCrossing(tooltipData)} in 4s`}
+              {`${yCrossing(tooltipData)} /4s interval`}
             </Tooltip>
             <Tooltip
-              top={yMax - 14}
+              top={yMax}
               left={tooltipLeft}
               style={{
                 transform: 'translateX(-50%)'
