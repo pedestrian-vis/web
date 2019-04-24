@@ -95,6 +95,7 @@ class Area extends React.Component {
             width={xMax}
             strokeDasharray="2,2"
             stroke="rgba(255,255,255,0.1)"
+            numTicks={5}
           />
           <GridColumns
             lineStyle={{ pointerEvents: 'none' }}
@@ -179,6 +180,7 @@ class Area extends React.Component {
               fontFamily: 'Arial'
             }}
             tickStroke="#bcbaba"
+            tickLength={7}
             tickLabelProps={(value, index) => ({
               fill: '#bcbaba',
               textAnchor: 'middle',
@@ -201,7 +203,7 @@ class Area extends React.Component {
               <circle
                 cx={tooltipLeft}
                 cy={tooltipTop}
-                r={4}
+                r={6}
                 fill="rgba(255, 255, 255, 0.3)"
                 stroke="white"
                 strokeWidth={1}
@@ -216,7 +218,7 @@ class Area extends React.Component {
               top={tooltipTop - 24}
               left={tooltipLeft + 12}
               style={{
-                backgroundColor: 'rgba(92, 119, 235, 1.000)',
+                backgroundColor: 'rgb(117, 95, 90)',
                 color: 'white'
               }}
             >

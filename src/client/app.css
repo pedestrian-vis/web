@@ -48,7 +48,7 @@ body {
 
 .area_illegal_flow {
     position: absolute;
-    bottom: 12px;
+    bottom: -8px;
     right: 48px;
 }
 
