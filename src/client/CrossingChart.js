@@ -37,11 +37,13 @@ class Area extends React.Component {
     if (d1 && d1.second) {
       d = x0 - xCrossing(d0.second) > xCrossing(d1.second) - x0 ? d1 : d0;
     }
-    showTooltip({
-      tooltipData: d,
-      tooltipLeft: x,
-      tooltipTop: yScale(d.crossings)
-    });
+    if (x0-Math.floor(x0)>0 && x0-Math.floor(x0)<0.3 && [6,10,14,18,22,26,30,34,38,42,46,50,54,58,62,66,70,74,78,82,86,90,94,98].includes(Math.floor(x0))) {
+      showTooltip({
+        tooltipData: d,
+        tooltipLeft: x,
+        tooltipTop: yScale(d.crossings)
+      });
+    }
   }
   render() {
     const {
@@ -173,7 +175,7 @@ class Area extends React.Component {
             labelProps={{
               fill: '#bcbaba',
               textAnchor: 'middle',
-              fontSize: 12,
+              fontSize: 11,
               fontFamily: 'Arial'
             }}
             tickStroke="#bcbaba"
@@ -218,7 +220,7 @@ class Area extends React.Component {
                 color: 'white'
               }}
             >
-              {`${yCrossing(tooltipData)} /4s interval`}
+              {`${yCrossing(tooltipData)} times`}
             </Tooltip>
             <Tooltip
               top={yMax}
@@ -227,7 +229,7 @@ class Area extends React.Component {
                 transform: 'translateX(-50%)'
               }}
             >
-              {`${xCrossing(tooltipData)} sec.`}
+              {`${xCrossing(tooltipData)-4}-${xCrossing(tooltipData)} sec.`}
             </Tooltip>
           </div>
         )}
