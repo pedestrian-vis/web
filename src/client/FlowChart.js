@@ -132,7 +132,7 @@ class Area extends React.Component {
             const cy = y(d);
             return (
               <g key={`line-point-${i}`}>
-                <GlyphDot cx={cx} cy={cy} r={2} fill={'rgba(255, 255, 255, 0.1)'} stroke={'rgb(255, 255, 255)'} strokeWidth={1} />
+                <GlyphDot cx={cx} cy={cy} r={3} fill={'rgba(255, 255, 255, 0.1)'} stroke={'rgb(255, 255, 255)'} strokeWidth={1} />
               </g>
             );
           })}

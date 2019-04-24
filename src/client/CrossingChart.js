@@ -88,6 +88,10 @@ class Area extends React.Component {
               <stop offset="0%" stopColor="rgb(253, 128, 93)" stopOpacity={0.5} />
               <stop offset="100%" stopColor="rgb(104, 90, 16)" stopOpacity={0.7} />
             </linearGradient>
+            <linearGradient id="gradient_cover" x1="0%" y1="50%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="rgb(0, 0, 0)" stopOpacity={0} />
+              <stop offset="100%" stopColor="rgb(0, 0, 0)" stopOpacity={0.6} />
+            </linearGradient>
           </defs>
           <GridRows
             lineStyle={{ pointerEvents: 'none' }}
@@ -112,6 +116,15 @@ class Area extends React.Component {
             strokeWidth={0}
             stroke={'url(#gradient_cross)'}
             fill={'url(#gradient_cross)'}
+            curve={curveMonotoneX}
+          />
+          <AreaClosed
+            data={crossing}
+            x={d => xScale(xCrossing(d))}
+            y={d => yScale(yCrossing(d))}
+            yScale={yScale}
+            strokeWidth={0}
+            fill={'url(#gradient_cover)'}
             curve={curveMonotoneX}
           />
           <LinePath
