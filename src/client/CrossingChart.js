@@ -8,8 +8,10 @@ import { withTooltip, Tooltip } from '@vx/tooltip';
 import { localPoint } from '@vx/event';
 import { bisector } from 'd3-array';
 
-import CrossingData from './data/statistics_crossing.json';
-const crossing = CrossingData;
+// redux states management
+import { connect } from 'react-redux';
+import { setFlow30 } from './actions/setFlow30';
+import { setFlow150 } from './actions/setFlow150';
 
 // util
 const min = (arr, fn) => Math.min(...arr.map(fn));
@@ -26,6 +28,20 @@ class Area extends React.Component {
     super(props);
     this.handleTooltip = this.handleTooltip.bind(this);
   }
+
+  getJSON(url) {
+    var resp ;
+    var xmlHttp ;
+    resp  = '' ;
+    xmlHttp = new XMLHttpRequest();
+    if (xmlHttp != null) {
+        xmlHttp.open( "GET", url, false );
+        xmlHttp.send( null );
+        resp = xmlHttp.responseText;
+    }
+    return resp ;
+  }
+
   handleTooltip({ event, data, xCrossing, xScale, yScale }) {
     const { showTooltip } = this.props;
     const { x } = localPoint(event);
@@ -62,6 +78,8 @@ class Area extends React.Component {
       events
     } = this.props;
     if (width < 10) return null;
+
+    const crossing = JSON.parse(this.getJSON(this.props.cross_url));
 
     // bounds
     const xMax = width - margin.left - margin.right;
@@ -113,8 +131,6 @@ class Area extends React.Component {
             x={d => xScale(xCrossing(d))}
             y={d => yScale(yCrossing(d))}
             yScale={yScale}
-            strokeWidth={0}
-            stroke={'url(#gradient_cross)'}
             fill={'url(#gradient_cross)'}
             curve={curveMonotoneX}
           />
@@ -123,7 +139,6 @@ class Area extends React.Component {
             x={d => xScale(xCrossing(d))}
             y={d => yScale(yCrossing(d))}
             yScale={yScale}
-            strokeWidth={0}
             fill={'url(#gradient_cover)'}
             curve={curveMonotoneX}
           />
@@ -235,7 +250,7 @@ class Area extends React.Component {
                 color: 'white'
               }}
             >
-              {`${yCrossing(tooltipData)} times`}
+              {yCrossing(tooltipData)==0||yCrossing(tooltipData)==1? `${yCrossing(tooltipData)} time`:`${yCrossing(tooltipData)} times`}
             </Tooltip>
             <Tooltip
               top={yMax}
@@ -253,4 +268,12 @@ class Area extends React.Component {
   }
 }
 
-export default withTooltip(Area);
+const mapStateToProps = state => ({
+  ...state
+});
+const mapDispatchToProps = dispatch => ({
+  setFlow30: () => dispatch(setFlow30),
+  setFlow150: () => dispatch(setFlow150)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withTooltip(Area));

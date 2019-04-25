@@ -9,6 +9,11 @@ import { localPoint } from '@vx/event';
 import { GlyphDot } from '@vx/glyph';
 import { bisector } from 'd3-array';
 
+// redux states management
+import { connect } from 'react-redux';
+import { setFlow30 } from './actions/setFlow30';
+import { setFlow150 } from './actions/setFlow150';
+
 import FlowData from './data/statistics_flow.json';
 const flow_st = FlowData;
 
@@ -26,7 +31,9 @@ class Area extends React.Component {
   constructor(props) {
     super(props);
     this.handleTooltip = this.handleTooltip.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
+
   handleTooltip({ event, data, x_st, xScale, yScale }) {
     const { showTooltip } = this.props;
     const { x } = localPoint(event);
@@ -46,6 +53,17 @@ class Area extends React.Component {
       });
     }
   }
+
+  handleClick({ event, xScale}) {
+    const { x } = localPoint(event);
+    const x0 = xScale.invert(x);
+    switch (Math.floor(x0)) {
+      case 30: this.props.setFlow30(); break;
+      case 150: this.props.setFlow150(); break;
+      default: ;
+    }
+  }
+
   render() {
     const {
       width=580,
@@ -172,6 +190,7 @@ class Area extends React.Component {
               })
             }
             onMouseLeave={event => hideTooltip()}
+            onClick={event => this.handleClick({ event, xScale })}
           />
           <AxisBottom
             top={110}
@@ -256,7 +275,7 @@ class Area extends React.Component {
                 transform: 'translateX(-50%)'
               }}
             >
-              {`${x_st(tooltipData)} /100s`}
+              {`${x_st(tooltipData)} people/100s`}
             </Tooltip>
           </div>
         )}
@@ -265,4 +284,12 @@ class Area extends React.Component {
   }
 }
 
-export default withTooltip(Area);
+const mapStateToProps = state => ({
+  ...state
+});
+const mapDispatchToProps = dispatch => ({
+  setFlow30: () => dispatch(setFlow30),
+  setFlow150: () => dispatch(setFlow150)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withTooltip(Area));
