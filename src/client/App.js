@@ -3,6 +3,11 @@ import { StaticMap } from 'react-map-gl';
 import DeckGL, { PolygonLayer, PathLayer, ScatterplotLayer } from 'deck.gl';
 import './app.css';
 
+// redux states management
+import { connect } from 'react-redux';
+import { setFlow30 } from './actions/setFlow30';
+import { setFlow150 } from './actions/setFlow150';
+
 import DataBuildings from './data/buildings.json';
 import DataVehicles from './data/vehicles.json';
 import DataZebras from './data/env_zebras.json';
@@ -21,11 +26,6 @@ import HeatmapBuffer from './HeatmapBuffer';
 document.addEventListener('contextmenu', evt => evt.preventDefault()); // give way to perspective control
 const MAPBOX_TOKEN = 'pk.eyJ1IjoiamVzc2llemgiLCJhIjoiY2pxeG5yNHhqMDBuZzN4cHA4ZGNwY2l3OCJ9.T2B6-B6EMW6u9XmjO4pNKw';
 
-const TRAJECTORY_URL = {
-  FLOW_150:
-    'https://raw.githubusercontent.com/pedestrian-vis/data_processing/master/trajectories/pedestrians_150.json'
-};
-
 /* Kungsgatan view */
 export const INITIAL_VIEW_STATE = {
   longitude: 18.063798,
@@ -37,7 +37,7 @@ export const INITIAL_VIEW_STATE = {
   pitch: 35
 };
 
-export default class App extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -74,7 +74,7 @@ export default class App extends Component {
     return [
       new ScatterplotLayer({
         id: 'pedestrians',
-        data: TRAJECTORY_URL.FLOW_150,
+        data: this.props.trajectory_url,
         // data: TESTDATA,
         opacity: 0.8,
         fp64: true,
@@ -229,3 +229,13 @@ export default class App extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  ...state
+});
+const mapDispatchToProps = dispatch => ({
+  setFlow30: () => dispatch(setFlow30),
+  setFlow150: () => dispatch(setFlow150)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
