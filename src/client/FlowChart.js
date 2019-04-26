@@ -11,8 +11,18 @@ import { bisector } from 'd3-array';
 
 // redux states management
 import { connect } from 'react-redux';
+import { setFlow15 } from './actions/setFlow15';
 import { setFlow30 } from './actions/setFlow30';
+import { setFlow45 } from './actions/setFlow45';
+import { setFlow60 } from './actions/setFlow60';
+import { setFlow75 } from './actions/setFlow75';
+import { setFlow90 } from './actions/setFlow90';
+import { setFlow105 } from './actions/setFlow105';
+import { setFlow120 } from './actions/setFlow120';
+import { setFlow135 } from './actions/setFlow135';
 import { setFlow150 } from './actions/setFlow150';
+import { setFlow165 } from './actions/setFlow165';
+import { setFlow180 } from './actions/setFlow180';
 
 import FlowData from './data/statistics_flow.json';
 const flow_st = FlowData;
@@ -58,8 +68,18 @@ class Area extends React.Component {
     const { x } = localPoint(event);
     const x0 = xScale.invert(x);
     switch (Math.floor(x0)) {
+      case 15: this.props.setFlow15(); break;
       case 30: this.props.setFlow30(); break;
+      case 45: this.props.setFlow45(); break;
+      case 60: this.props.setFlow60(); break;
+      case 75: this.props.setFlow75(); break;
+      case 90: this.props.setFlow90(); break;
+      case 105: this.props.setFlow105(); break;
+      case 120: this.props.setFlow120(); break;
+      case 135: this.props.setFlow135(); break;
       case 150: this.props.setFlow150(); break;
+      case 165: this.props.setFlow165(); break;
+      case 180: this.props.setFlow180(); break;
       default: ;
     }
   }
@@ -288,8 +308,18 @@ const mapStateToProps = state => ({
   ...state
 });
 const mapDispatchToProps = dispatch => ({
+  setFlow15: () => dispatch(setFlow15),
   setFlow30: () => dispatch(setFlow30),
-  setFlow150: () => dispatch(setFlow150)
+  setFlow45: () => dispatch(setFlow45),
+  setFlow60: () => dispatch(setFlow60),
+  setFlow75: () => dispatch(setFlow75),
+  setFlow90: () => dispatch(setFlow90),
+  setFlow105: () => dispatch(setFlow105),
+  setFlow120: () => dispatch(setFlow120),
+  setFlow135: () => dispatch(setFlow135),
+  setFlow150: () => dispatch(setFlow150),
+  setFlow165: () => dispatch(setFlow165),
+  setFlow180: () => dispatch(setFlow180)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withTooltip(Area));

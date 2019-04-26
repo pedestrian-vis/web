@@ -1,14 +1,14 @@
 [
-    {"illegal":4,"flow":15},
-    {"illegal":5,"flow":30},
-    {"illegal":5,"flow":45},
-    {"illegal":8,"flow":60},
-    {"illegal":16,"flow":75},
-    {"illegal":20,"flow":90},
-    {"illegal":30,"flow":105},
-    {"illegal":50,"flow":120},
-    {"illegal":74,"flow":135},
+    {"illegal":62.2,"flow":15},
+    {"illegal":71.1,"flow":30},
+    {"illegal":74.1,"flow":45},
+    {"illegal":80.0,"flow":60},
+    {"illegal":83.5,"flow":75},
+    {"illegal":88.9,"flow":90},
+    {"illegal":86.3,"flow":105},
+    {"illegal":80.0,"flow":120},
+    {"illegal":86.4,"flow":135},
     {"illegal":82.2,"flow":150},
-    {"illegal":86,"flow":165},
-    {"illegal":91,"flow":180}
+    {"illegal":86.9,"flow":165},
+    {"illegal":88.9,"flow":180}
 ]

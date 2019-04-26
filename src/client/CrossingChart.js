@@ -10,8 +10,6 @@ import { bisector } from 'd3-array';
 
 // redux states management
 import { connect } from 'react-redux';
-import { setFlow30 } from './actions/setFlow30';
-import { setFlow150 } from './actions/setFlow150';
 
 // util
 const min = (arr, fn) => Math.min(...arr.map(fn));
@@ -271,9 +269,5 @@ class Area extends React.Component {
 const mapStateToProps = state => ({
   ...state
 });
-const mapDispatchToProps = dispatch => ({
-  setFlow30: () => dispatch(setFlow30),
-  setFlow150: () => dispatch(setFlow150)
-});
 
-export default connect(mapStateToProps, mapDispatchToProps)(withTooltip(Area));
+export default connect(mapStateToProps)(withTooltip(Area));

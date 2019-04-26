@@ -5,8 +5,6 @@ import './app.css';
 
 // redux states management
 import { connect } from 'react-redux';
-import { setFlow30 } from './actions/setFlow30';
-import { setFlow150 } from './actions/setFlow150';
 
 import DataBuildings from './data/buildings.json';
 import DataVehicles from './data/vehicles.json';
@@ -19,9 +17,6 @@ import FlowChart from './FlowChart';
 import CrossingChart from './CrossingChart';
 import HeatmapMain from './HeatmapMain';
 import HeatmapBuffer from './HeatmapBuffer';
-
-// help testing
-// import TESTDATA from './data/pedestrians.json';
 
 document.addEventListener('contextmenu', evt => evt.preventDefault()); // give way to perspective control
 const MAPBOX_TOKEN = 'pk.eyJ1IjoiamVzc2llemgiLCJhIjoiY2pxeG5yNHhqMDBuZzN4cHA4ZGNwY2l3OCJ9.T2B6-B6EMW6u9XmjO4pNKw';
@@ -75,7 +70,6 @@ class App extends Component {
       new ScatterplotLayer({
         id: 'pedestrians',
         data: this.props.trajectory_url,
-        // data: TESTDATA,
         opacity: 0.8,
         fp64: true,
         getPosition: (d) => {
@@ -233,9 +227,5 @@ class App extends Component {
 const mapStateToProps = state => ({
   ...state
 });
-const mapDispatchToProps = dispatch => ({
-  setFlow30: () => dispatch(setFlow30),
-  setFlow150: () => dispatch(setFlow150)
-});
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);

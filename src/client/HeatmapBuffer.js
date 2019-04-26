@@ -6,8 +6,6 @@ import { withTooltip, Tooltip } from '@vx/tooltip';
 
 // redux states management
 import { connect } from 'react-redux';
-import { setFlow30 } from './actions/setFlow30';
-import { setFlow150 } from './actions/setFlow150';
 
 class HeatmapBuf extends React.Component {
   constructor(props) {
@@ -131,9 +129,5 @@ class HeatmapBuf extends React.Component {
 const mapStateToProps = state => ({
   ...state
 });
-const mapDispatchToProps = dispatch => ({
-  setFlow30: () => dispatch(setFlow30),
-  setFlow150: () => dispatch(setFlow150)
-});
 
-export default connect(mapStateToProps, mapDispatchToProps)(HeatmapBuf);
+export default connect(mapStateToProps)(HeatmapBuf);
