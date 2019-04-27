@@ -202,6 +202,7 @@ class App extends Component {
         <div className="left_graph">
           <span className="title_area">Crossing Frequency<span className="current_flow">&nbsp;&nbsp;&nbsp;{this.props.flow_value} people/signal cycle</span></span>
           <div className="area_cross_time"><CrossingChart /></div>
+          <span className="area_cross_anno annotation">Light turns green at 75s</span>
         </div>
         <div className="right_top_graph">
           <span className="title_uti">Space Utilization<span className="current_flow">&nbsp;&nbsp;&nbsp;{this.props.flow_value} people/signal cycle</span></span>
@@ -209,6 +210,11 @@ class App extends Component {
             <div className="heatmap_main"><HeatmapMain /></div>
             <div className="heatmap_buf"><HeatmapBuffer /></div>
           </div>
+          <span className="heatmap_ori1 annotation">WEST</span>
+          <span className="heatmap_ori2 annotation">EAST</span>
+          <span className="heatmap_leg_text1 annotation">heavily used&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;not used - lane area</span>
+          <div className="heatmap_legend" />
+          <span className="heatmap_leg_text2 annotation">heavily used&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;not used - buffer area</span>
         </div>
         <div className="right_bottom_graph">
           <span className="title_area">Illegal Percentage<span className="current_flow">&nbsp;&nbsp;&nbsp;select a flow rate!!!</span></span>

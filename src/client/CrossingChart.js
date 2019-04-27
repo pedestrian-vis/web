@@ -186,7 +186,7 @@ class Area extends React.Component {
             onMouseLeave={event => hideTooltip()}
           />
           <Line
-            from={{ x: 518, y: 30 }}
+            from={{ x: 518, y: 16 }}
             to={{ x: 518, y: 130 }}
             stroke="rgba(247, 203, 190, 0.6)"
             strokeWidth={1}
