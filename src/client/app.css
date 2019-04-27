@@ -113,6 +113,11 @@ body {
     left: 301px;
 }
 
+.annotation {
+    color: rgb(170, 170, 170);
+    font-size: 13px;
+}
+
 .heatmap_legend {
     position: absolute;
     width: 58px;
@@ -124,11 +129,6 @@ body {
     border-right-style: solid;
     border-right-color: rgb(66, 66, 66);
     border-right-width: 0.5px;
-}
-
-.annotation {
-    color: rgb(170, 170, 170);
-    font-size: 13px;
 }
 
 .heatmap_leg_text1 {
@@ -144,15 +144,15 @@ body {
 }
 
 .heatmap_ori1 {
-    position: absolute;
-    bottom: 145px;
-    left: 66px;
+    position: relative;
+    bottom: 400px;
+    left: 24px;
 }
 
 .heatmap_ori2 {
-    position: absolute;
-    bottom: 145px;
-    right: 60px;
+    position: relative;
+    bottom: 400px;
+    left: 480px;
 }
 
 .area_cross_anno {

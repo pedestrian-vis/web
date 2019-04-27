@@ -209,12 +209,12 @@ class App extends Component {
           <div className="heatmap_container">
             <div className="heatmap_main"><HeatmapMain /></div>
             <div className="heatmap_buf"><HeatmapBuffer /></div>
+            <span className="heatmap_ori1 annotation">WEST</span>
+            <span className="heatmap_ori2 annotation">EAST</span>
           </div>
-          <span className="heatmap_ori1 annotation">WEST</span>
-          <span className="heatmap_ori2 annotation">EAST</span>
-          <span className="heatmap_leg_text1 annotation">heavily used&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;not used - lane area</span>
           <div className="heatmap_legend" />
           <span className="heatmap_leg_text2 annotation">heavily used&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;not used - buffer area</span>
+          <span className="heatmap_leg_text1 annotation">heavily used&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;not used - lane area</span>
         </div>
         <div className="right_bottom_graph">
           <span className="title_area">Illegal Percentage<span className="current_flow">&nbsp;&nbsp;&nbsp;select a flow rate!!!</span></span>
