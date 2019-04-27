@@ -202,7 +202,7 @@ class Area extends React.Component {
             labelProps={{
               fill: '#bcbaba',
               textAnchor: 'middle',
-              fontSize: 11,
+              fontSize: 12,
               fontFamily: 'Arial'
             }}
             tickStroke="#bcbaba"

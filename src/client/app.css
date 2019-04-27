@@ -20,6 +20,7 @@ body {
     border-top-style: solid;
     border-top-color: rgb(141, 141, 141);
     border-top-width: 1px;
+    overflow: hidden;
 }
 
 .right_top_graph {
@@ -44,6 +45,7 @@ body {
     border-top-style: solid;
     border-top-color: rgb(141, 141, 141);
     border-top-width: 1px;
+    overflow: hidden;
 }
 
 .area_illegal_flow {

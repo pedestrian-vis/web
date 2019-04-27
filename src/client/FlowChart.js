@@ -42,6 +42,7 @@ class Area extends React.Component {
     super(props);
     this.handleTooltip = this.handleTooltip.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.showCurrentFlow = this.showCurrentFlow.bind(this);
   }
 
   handleTooltip({ event, data, x_st, xScale, yScale }) {
@@ -55,12 +56,15 @@ class Area extends React.Component {
     if (d1 && d1.flow) {
       d = x0 - x_st(d0.flow) > x_st(d1.flow) - x0 ? d1 : d0;
     }
-    if (x0-Math.floor(x0)>0 && x0-Math.floor(x0)<0.5 && [15,30,45,60,75,90,105,120,135,150,165,180].includes(Math.floor(x0))) {
+    if (x0-Math.floor(x0)>0 && [15,30,45,60,75,90,105,120,135,150,165,180].includes(Math.floor(x0))) {
+      event.target.style.cursor = 'pointer';
       showTooltip({
         tooltipData: d,
         tooltipLeft: x,
         tooltipTop: yScale(d.illegal)
       });
+    } else {
+      event.target.style.cursor = 'default';
     }
   }
 
@@ -84,17 +88,43 @@ class Area extends React.Component {
     }
   }
 
+  showCurrentFlow({ data, x_st, yScale }) {
+    const { showTooltip } = this.props;
+    const x0 = this.props.flow_value + 0.001;
+    const index = bisectDate(data, x0, 1);
+    const d0 = data[index - 1];
+    const d1 = data[index];
+    let d = d0;
+    if (d1 && d1.flow) {
+      d = x0 - x_st(d0.flow) > x_st(d1.flow) - x0 ? d1 : d0;
+    }
+    showTooltip({
+      tooltipData: d,
+      tooltipLeft: this.props.flow_value * 3.05567,
+      tooltipTop: yScale(d.illegal)
+    });
+  }
+
+  componentDidMount() {
+    const yMax = 80 // height - margin.top - margin.bottom;
+    const yScale = scaleLinear({
+      range: [yMax, 0],
+      domain: [0, max(flow_st, y_st) + yMax / 20],
+      nice: true
+    });
+    this.showCurrentFlow({ x_st, yScale, data: flow_st });
+  }
+
   render() {
     const {
       width=580,
-      height=170,
+      height=140,
       margin={
         top: 20,
         left: 20,
         right: 10,
         bottom: 40
       },
-      hideTooltip,
       tooltipData,
       tooltipTop,
       tooltipLeft,
@@ -182,24 +212,7 @@ class Area extends React.Component {
             fill="transparent"
             rx={14}
             data={flow_st}
-            onTouchStart={event =>
-              this.handleTooltip({
-                event,
-                x_st,
-                xScale,
-                yScale,
-                data: flow_st
-              })
-            }
-            onTouchMove={event =>
-              this.handleTooltip({
-                event,
-                x_st,
-                xScale,
-                yScale,
-                data: flow_st
-              })
-            }
+            onClick={event => this.handleClick({ event, xScale })}
             onMouseMove={event =>
               this.handleTooltip({
                 event,
@@ -209,19 +222,18 @@ class Area extends React.Component {
                 data: flow_st
               })
             }
-            onMouseLeave={event => hideTooltip()}
-            onClick={event => this.handleClick({ event, xScale })}
+            onMouseLeave={ () => this.showCurrentFlow({ x_st, yScale, data: flow_st }) }
           />
           <AxisBottom
-            top={110}
+            top={80}
             scale={xScale}
             stroke="#bcbaba"
             tickStroke="#bcbaba"
-            label="Pedestrian Flow Rate (number of people per signal cycle)"
+            label="Pedestrian Flow Rate (number of people/100s)"
             labelProps={{
               fill: '#bcbaba',
               textAnchor: 'middle',
-              fontSize: 11,
+              fontSize: 12,
               fontFamily: 'Arial'
             }}
             tickStroke="#bcbaba"
@@ -245,7 +257,7 @@ class Area extends React.Component {
             stroke="#bcbaba"
             tickStroke="#bcbaba"
             tickLength={6}
-            tickValues={[20,40,60,80]}
+            tickValues={[20,40,60,70,80,90]}
             tickLabelProps={(value, index) => ({
               fill: '#bcbaba',
               textAnchor: 'start',
@@ -279,8 +291,8 @@ class Area extends React.Component {
         {tooltipData && (
           <div>
             <Tooltip
-              top={tooltipTop - 24}
-              left={tooltipLeft + 12}
+              top={tooltipTop - 36}
+              left={tooltipLeft - 64}
               style={{
                 backgroundColor: 'rgb(117, 95, 90)',
                 color: 'white'
@@ -295,7 +307,7 @@ class Area extends React.Component {
                 transform: 'translateX(-50%)'
               }}
             >
-              {`${x_st(tooltipData)} people/100s`}
+              {`${x_st(tooltipData)} people/signal cycle`}
             </Tooltip>
           </div>
         )}
