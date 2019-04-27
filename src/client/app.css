@@ -48,6 +48,33 @@ body {
     overflow: hidden;
 }
 
+.title_uti {
+    position: absolute;
+    left: 24px;
+    top: 24px;
+    padding: 3px 6px 3px 6px;
+    border: 1px solid rgb(133, 131, 131);
+    border-radius: 5px;
+    color: white;
+    background-color: rgb(88, 88, 88);
+}
+
+.title_area {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    padding: 3px 6px 3px 6px;
+    border: 1px solid rgb(133, 131, 131);
+    border-radius: 5px;
+    color: white;
+    background-color: rgb(88, 88, 88);
+}
+
+.current_flow {
+    color: rgb(250, 180, 160);
+    font-size: 90%;
+}
+
 .area_illegal_flow {
     position: absolute;
     bottom: -8px;
@@ -104,6 +131,7 @@ body {
 
 .second {
     position: absolute;
+    width: 200px;
     left: 22px;
 }
 

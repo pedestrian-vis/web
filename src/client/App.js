@@ -23,7 +23,7 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiamVzc2llemgiLCJhIjoiY2pxeG5yNHhqMDBuZzN4cHA4ZGN
 
 /* Kungsgatan view */
 export const INITIAL_VIEW_STATE = {
-  longitude: 18.063798,
+  longitude: 18.063808,
   latitude: 59.335350,
   zoom: 19.68,
   maxZoom: 21.3,
@@ -200,20 +200,23 @@ class App extends Component {
           </DeckGL>
         </div>
         <div className="left_graph">
+          <span className="title_area">Crossing Frequency<span className="current_flow">&nbsp;&nbsp;&nbsp;{this.props.flow_value} people/signal cycle</span></span>
           <div className="area_cross_time"><CrossingChart /></div>
         </div>
         <div className="right_top_graph">
+          <span className="title_uti">Space Utilization<span className="current_flow">&nbsp;&nbsp;&nbsp;{this.props.flow_value} people/signal cycle</span></span>
           <div className="heatmap_container">
             <div className="heatmap_main"><HeatmapMain /></div>
             <div className="heatmap_buf"><HeatmapBuffer /></div>
           </div>
         </div>
         <div className="right_bottom_graph">
+          <span className="title_area">Illegal Percentage<span className="current_flow">&nbsp;&nbsp;&nbsp;select a flow rate!!!</span></span>
           <div className="area_illegal_flow"><FlowChart /></div>
         </div>
         <div className={time > 900 && time < 1050 ? 'timer_acc' : 'timer_nom'}>
           {displayTime}
-          <span className="second">s</span>
+          <span className="second">s<span className="current_flow">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{this.props.flow_value} people/signal cycle</span></span>
         </div>
         <div className="light_outline">
           <span className={time < 1800 ? 'light_red_on' : 'light_red_off'} />
