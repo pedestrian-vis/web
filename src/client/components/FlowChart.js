@@ -11,20 +11,20 @@ import { bisector } from 'd3-array';
 
 // redux states management
 import { connect } from 'react-redux';
-import { setFlow15 } from './actions/setFlow15';
-import { setFlow30 } from './actions/setFlow30';
-import { setFlow45 } from './actions/setFlow45';
-import { setFlow60 } from './actions/setFlow60';
-import { setFlow75 } from './actions/setFlow75';
-import { setFlow90 } from './actions/setFlow90';
-import { setFlow105 } from './actions/setFlow105';
-import { setFlow120 } from './actions/setFlow120';
-import { setFlow135 } from './actions/setFlow135';
-import { setFlow150 } from './actions/setFlow150';
-import { setFlow165 } from './actions/setFlow165';
-import { setFlow180 } from './actions/setFlow180';
+import { setFlow15 } from '../actions/setFlow15';
+import { setFlow30 } from '../actions/setFlow30';
+import { setFlow45 } from '../actions/setFlow45';
+import { setFlow60 } from '../actions/setFlow60';
+import { setFlow75 } from '../actions/setFlow75';
+import { setFlow90 } from '../actions/setFlow90';
+import { setFlow105 } from '../actions/setFlow105';
+import { setFlow120 } from '../actions/setFlow120';
+import { setFlow135 } from '../actions/setFlow135';
+import { setFlow150 } from '../actions/setFlow150';
+import { setFlow165 } from '../actions/setFlow165';
+import { setFlow180 } from '../actions/setFlow180';
 
-import FlowData from './data/statistics_flow.json';
+import FlowData from '../data/statistics_flow.json';
 const flow_st = FlowData;
 
 // util

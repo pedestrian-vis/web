@@ -93,7 +93,7 @@ body {
     height: 80%;
     top: 70px;
     left: 44px;
-    background-image: url("./img/utilization_back.png");
+    background-image: url("../img/utilization_back.png");
     background-size: 567px 446px;  /* original 908px 711px */
     background-repeat: no-repeat;
     overflow-x: hidden;
@@ -122,7 +122,7 @@ body {
     position: absolute;
     width: 58px;
     height: 30px;
-    background-image: url("./img/heatmap_legend.png");
+    background-image: url("../img/heatmap_legend.png");
     background-size: 58px 30px;
     bottom: 57px;
     left: 131px;
@@ -185,7 +185,7 @@ body {
 
 .light_outline {
     position: absolute;
-    left: 52.2%;
+    right: 1.2%;
     top: 1%; 
     background-color:rgb(0, 0, 0);
     width: 30px;
