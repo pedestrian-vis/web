@@ -18,13 +18,16 @@ class App extends Component {
   render() {
     return (
       <div>
+        <div className={this.props.loading ? 'loading_back' : ''} />
         <div className="left_simulation">
           <Simulation />
+          <span className={this.props.loading ? 'loading_icon1' : ''} />
         </div>
         <div className="left_graph">
           <span className="title_area">Crossing Frequency<span className="current_flow">&nbsp;&nbsp;&nbsp;{this.props.flow_value} people/signal cycle</span></span>
           <div className="area_cross_time"><CrossingChart /></div>
           <span className="area_cross_anno annotation">Light turns green at 75s</span>
+          <span className={this.props.loading ? 'loading_icon2' : ''} />
         </div>
         <div className="right_top_graph">
           <span className="title_uti">Space Utilization<span className="current_flow">&nbsp;&nbsp;&nbsp;{this.props.flow_value} people/signal cycle</span></span>
@@ -33,6 +36,7 @@ class App extends Component {
             <div className="heatmap_buf"><HeatmapBuffer /></div>
             <span className="heatmap_ori1 annotation">WEST</span>
             <span className="heatmap_ori2 annotation">EAST</span>
+            <span className={this.props.loading ? 'loading_icon3' : ''} />
           </div>
           <div className="heatmap_legend" />
           <span className="heatmap_leg_text2 annotation">heavily used&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;not used - buffer area</span>

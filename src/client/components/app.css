@@ -2,6 +2,67 @@ body {
     font-family: 'Raleway', sans-serif;
 }
 
+.loading_back {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(255,255,255,0.3);
+    z-index: 10;
+    opacity: 0;
+    animation: fade-out-keyframes 1.5s;
+}
+
+.loading_icon1 {
+    position: absolute;
+    top: 40%;
+    left: 45%;
+    height: 100px;
+    width: 100px;
+    background-image: url("../img/loading.png");
+    background-size: 100px 100px;
+    background-repeat: no-repeat;
+    z-index: 11;
+    opacity: 0;
+    animation: fade-out-keyframes 1.7s;
+}
+
+.loading_icon2 {
+    position: absolute;
+    top: 22%;
+    left: 45%;
+    height: 100px;
+    width: 100px;
+    background-image: url("../img/loading.png");
+    background-size: 100px 100px;
+    background-repeat: no-repeat;
+    z-index: 11;
+    opacity: 0;
+    animation: fade-out-keyframes 1.7s;
+}
+
+.loading_icon3 {
+    position: absolute;
+    top: 34%;
+    left: 40%;
+    height: 100px;
+    width: 100px;
+    background-image: url("../img/loading.png");
+    background-size: 100px 100px;
+    background-repeat: no-repeat;
+    z-index: 11;
+    opacity: 0;
+    animation: fade-out-keyframes 1.7s;
+}
+
+@keyframes fade-out-keyframes {
+    0% {opacity: 0}
+    20% {opacity: 1}
+    30% {opacity: 1}
+    100% {opacity: 0}
+}
+
 .left_simulation {
     position: absolute;
     left: 0;
