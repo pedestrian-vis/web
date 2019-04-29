@@ -25,7 +25,7 @@ body {
     background-repeat: no-repeat;
     z-index: 11;
     opacity: 0;
-    animation: fade-out-keyframes 1.7s;
+    animation: fade-out-keyframes 1.7s, rotate-keyframe 1.7s;
 }
 
 .loading_icon2 {
@@ -39,7 +39,7 @@ body {
     background-repeat: no-repeat;
     z-index: 11;
     opacity: 0;
-    animation: fade-out-keyframes 1.7s;
+    animation: fade-out-keyframes 1.7s, rotate-keyframe 1.7s;
 }
 
 .loading_icon3 {
@@ -53,14 +53,18 @@ body {
     background-repeat: no-repeat;
     z-index: 11;
     opacity: 0;
-    animation: fade-out-keyframes 1.7s;
+    animation: fade-out-keyframes 1.7s, rotate-keyframe 1.7s;
 }
 
 @keyframes fade-out-keyframes {
     0% {opacity: 0}
-    20% {opacity: 1}
-    30% {opacity: 1}
+    20% {opacity: 0.6}
+    30% {opacity: 0.6}
     100% {opacity: 0}
+}
+
+@keyframes rotate-keyframe {
+    100% { transform: rotate(180deg) }
 }
 
 .left_simulation {
