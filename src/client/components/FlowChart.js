@@ -92,7 +92,6 @@ class Area extends React.Component {
       setTimeout(function(){ this.props.stopLoading(); }.bind(this),1700);
     }
   }
-    
 
   showCurrentFlow({ data, x_st, yScale }) {
     const { showTooltip } = this.props;
@@ -286,13 +285,21 @@ class Area extends React.Component {
               <circle
                 cx={tooltipLeft}
                 cy={tooltipTop}
-                r={6}
-                fill="rgba(255, 255, 255, 0.8)"
+                r={7}
+                fill="rgba(255, 255, 255, 0)"
                 strokeWidth={1}
+                stroke="white"
                 style={{ pointerEvents: 'none' }}
               />
             </g>
           )}
+          <circle
+            cx={this.props.flow_value * 3.05567}
+            cy={yScale(flow_st[bisectDate(flow_st, this.props.flow_value, 1)].illegal)}
+            r={7}
+            fill="rgba(255, 255, 255, 1)"
+            style={{ pointerEvents: 'none' }}
+          />
         </svg>
         {tooltipData && (
           <div>
