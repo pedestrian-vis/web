@@ -8,10 +8,15 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    background-color: rgba(255,255,255,0.3);
+    background-color: rgba(255,255,255,0.2);
     z-index: 10;
-    opacity: 0;
-    animation: fade-out-keyframes 1.5s;
+    animation: fade-in-keyframes 0.3s;
+    pointer-events: none;
+}
+
+.loading_back.fade {
+    animation: fade-out-keyframes 1.0s;
+    animation-fill-mode: forwards; 
 }
 
 .loading_icon1 {
@@ -24,8 +29,13 @@ body {
     background-size: 100px 100px;
     background-repeat: no-repeat;
     z-index: 11;
-    opacity: 0;
-    animation: fade-out-keyframes 1.7s, rotate-keyframe 1.7s;
+    animation: fade-in-keyframes 0.3s, rotate-keyframe 1.8s linear infinite;
+    pointer-events: none;
+}
+
+.loading_icon1.fade {
+    animation: fade-out-keyframes 1.2s, rotate-keyframe 1.8s linear infinite;
+    animation-fill-mode: forwards; 
 }
 
 .loading_icon2 {
@@ -38,8 +48,13 @@ body {
     background-size: 100px 100px;
     background-repeat: no-repeat;
     z-index: 11;
-    opacity: 0;
-    animation: fade-out-keyframes 1.7s, rotate-keyframe 1.7s;
+    animation: fade-in-keyframes 0.3s, rotate-keyframe 1.8s linear infinite;
+    pointer-events: none;
+}
+
+.loading_icon2.fade {
+    animation: fade-out-keyframes 1.2s, rotate-keyframe 1.8s linear infinite;
+    animation-fill-mode: forwards; 
 }
 
 .loading_icon3 {
@@ -52,19 +67,28 @@ body {
     background-size: 100px 100px;
     background-repeat: no-repeat;
     z-index: 11;
-    opacity: 0;
-    animation: fade-out-keyframes 1.7s, rotate-keyframe 1.7s;
+    animation: fade-in-keyframes 0.3s, rotate-keyframe 1.8s linear infinite;
+    pointer-events: none;
+}
+
+.loading_icon3.fade {
+    animation: fade-out-keyframes 1.2s, rotate-keyframe 1.8s linear infinite;
+    animation-fill-mode: forwards; 
+}
+
+@keyframes fade-in-keyframes {
+    0% {opacity: 0}
+    100% {opacity: 0.6}
 }
 
 @keyframes fade-out-keyframes {
-    0% {opacity: 0}
-    20% {opacity: 0.6}
+    0% {opacity: 0.6}
     30% {opacity: 0.6}
     100% {opacity: 0}
 }
 
 @keyframes rotate-keyframe {
-    100% { transform: rotate(180deg) }
+    100% { transform: rotate(360deg) }
 }
 
 .left_simulation {

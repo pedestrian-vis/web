@@ -24,7 +24,6 @@ import { setFlow150 } from '../actions/setFlow150';
 import { setFlow165 } from '../actions/setFlow165';
 import { setFlow180 } from '../actions/setFlow180';
 import { startLoading } from '../actions/startLoading';
-import { stopLoading } from '../actions/stopLoading';
 
 import FlowData from '../data/statistics_flow.json';
 const flow_st = FlowData;
@@ -75,21 +74,20 @@ class Area extends React.Component {
     const x0 = xScale.invert(x);
     if (Math.floor(x0) != this.props.flow_value) {
       switch (Math.floor(x0)) {
-        case 15: this.props.startLoading(); setTimeout(function(){ this.props.setFlow15(); }.bind(this),20); break;
-        case 30: this.props.startLoading(); setTimeout(function(){ this.props.setFlow30(); }.bind(this),20); break;
-        case 45: this.props.startLoading(); setTimeout(function(){ this.props.setFlow45(); }.bind(this),20); break;
-        case 60: this.props.startLoading(); setTimeout(function(){ this.props.setFlow60(); }.bind(this),20); break;
-        case 75: this.props.startLoading(); setTimeout(function(){ this.props.setFlow75(); }.bind(this),20); break;
-        case 90: this.props.startLoading(); setTimeout(function(){ this.props.setFlow90(); }.bind(this),20); break;
-        case 105: this.props.startLoading(); setTimeout(function(){ this.props.setFlow105(); }.bind(this),20); break;
-        case 120: this.props.startLoading(); setTimeout(function(){ this.props.setFlow120(); }.bind(this),20); break;
-        case 135: this.props.startLoading(); setTimeout(function(){ this.props.setFlow135(); }.bind(this),20); break;
-        case 150: this.props.startLoading(); setTimeout(function(){ this.props.setFlow150(); }.bind(this),20); break;
-        case 165: this.props.startLoading(); setTimeout(function(){ this.props.setFlow165(); }.bind(this),20); break;
-        case 180: this.props.startLoading(); setTimeout(function(){ this.props.setFlow180(); }.bind(this),20); break;
+        case 15: this.props.startLoading(); setTimeout(function(){ this.props.setFlow15(); }.bind(this),0); break;
+        case 30: this.props.startLoading(); setTimeout(function(){ this.props.setFlow30(); }.bind(this),0); break;
+        case 45: this.props.startLoading(); setTimeout(function(){ this.props.setFlow45(); }.bind(this),0); break;
+        case 60: this.props.startLoading(); setTimeout(function(){ this.props.setFlow60(); }.bind(this),0); break;
+        case 75: this.props.startLoading(); setTimeout(function(){ this.props.setFlow75(); }.bind(this),0); break;
+        case 90: this.props.startLoading(); setTimeout(function(){ this.props.setFlow90(); }.bind(this),0); break;
+        case 105: this.props.startLoading(); setTimeout(function(){ this.props.setFlow105(); }.bind(this),0); break;
+        case 120: this.props.startLoading(); setTimeout(function(){ this.props.setFlow120(); }.bind(this),0); break;
+        case 135: this.props.startLoading(); setTimeout(function(){ this.props.setFlow135(); }.bind(this),0); break;
+        case 150: this.props.startLoading(); setTimeout(function(){ this.props.setFlow150(); }.bind(this),0); break;
+        case 165: this.props.startLoading(); setTimeout(function(){ this.props.setFlow165(); }.bind(this),0); break;
+        case 180: this.props.startLoading(); setTimeout(function(){ this.props.setFlow180(); }.bind(this),0); break;
         default: ;
       }
-      setTimeout(function(){ this.props.stopLoading(); }.bind(this),1700);
     }
   }
 
@@ -345,8 +343,7 @@ const mapDispatchToProps = dispatch => ({
   setFlow150: () => dispatch(setFlow150),
   setFlow165: () => dispatch(setFlow165),
   setFlow180: () => dispatch(setFlow180),
-  startLoading: () => dispatch(startLoading),
-  stopLoading: () => dispatch(stopLoading)
+  startLoading: () => dispatch(startLoading)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withTooltip(Area));
