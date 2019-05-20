@@ -2,7 +2,6 @@ import React from 'react';
 import { Group } from '@vx/group';
 import { scaleLinear } from '@vx/scale';
 import { HeatmapRect } from '@vx/heatmap';
-import { withTooltip, Tooltip } from '@vx/tooltip';
 
 // redux states management
 import { connect } from 'react-redux';
@@ -110,10 +109,6 @@ class HeatmapMain extends React.Component {
                       y={bin.y}
                       fill={bin.color}
                       fillOpacity={bin.opacity}
-                      onClick={event => {
-                        const { row, column } = bin;
-                        alert(JSON.stringify({ row, column, ...bin.bin }));
-                      }}
                     />
                   );
                 });

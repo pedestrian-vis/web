@@ -2,7 +2,6 @@ import React from 'react';
 import { Group } from '@vx/group';
 import { scaleLinear } from '@vx/scale';
 import { HeatmapRect } from '@vx/heatmap';
-import { withTooltip, Tooltip } from '@vx/tooltip';
 
 // redux states management
 import { connect } from 'react-redux';
@@ -38,7 +37,7 @@ class HeatmapBuf extends React.Component {
     } = this.props;
     
     const hot1 = 'rgb(29, 29, 29)';
-    const hot2 = 'rgb(247, 116, 79)';
+    const hot2 = 'rgb(234, 162, 91)';
     const data = JSON.parse(this.getJSON(this.props.utilization_buf_url));
 
     // utils
@@ -110,10 +109,6 @@ class HeatmapBuf extends React.Component {
                       y={bin.y}
                       fill={bin.color}
                       fillOpacity={bin.opacity}
-                      onClick={event => {
-                        const { row, column } = bin;
-                        alert(JSON.stringify({ row, column, ...bin.bin }));
-                      }}
                     />
                   );
                 });

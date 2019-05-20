@@ -102,11 +102,11 @@ class Area extends React.Component {
           <defs>
             <linearGradient id="gradient_cross" x1="74.9%" y1="0%" x2="75.1%" y2="0%">
               <stop offset="0%" stopColor="rgb(253, 128, 93)" stopOpacity={0.5} />
-              <stop offset="100%" stopColor="rgb(104, 90, 16)" stopOpacity={0.7} />
+              <stop offset="100%" stopColor="rgb(120, 151, 0)" stopOpacity={0.6} />
             </linearGradient>
             <linearGradient id="gradient_cover" x1="0%" y1="50%" x2="0%" y2="100%">
               <stop offset="0%" stopColor="rgb(0, 0, 0)" stopOpacity={0} />
-              <stop offset="100%" stopColor="rgb(0, 0, 0)" stopOpacity={0.6} />
+              <stop offset="100%" stopColor="rgb(0, 0, 0)" stopOpacity={0.95} />
             </linearGradient>
           </defs>
           <GridRows
@@ -144,8 +144,8 @@ class Area extends React.Component {
             data={crossing}
             x={d => xScale(xCrossing(d))}
             y={d => yScale(yCrossing(d))}
-            stroke="rgba(255,255,255,0.4)"
-            strokeWidth={1}
+            stroke="rgba(255,255,255,0.5)"
+            strokeWidth={0.8}
             curve={curveMonotoneX}
           />
           <Bar

@@ -160,9 +160,9 @@ class Area extends React.Component {
         <svg ref={s => (this.svg = s)} width={width} height={height}>
           <rect x={0} y={0} width={width} height={height} opacity={0} />
           <defs>
-            <linearGradient id="gradient_flow" x1="0%" y1="20%" x2="0%" y2="100%">
+            <linearGradient id="gradient_flow" x1="0%" y1="5%" x2="0%" y2="88%">
               <stop offset="0%" stopColor="rgb(253, 128, 93)" stopOpacity={0.5} />
-              <stop offset="100%" stopColor="rgb(253, 128, 93)" stopOpacity={0.2} />
+              <stop offset="100%" stopColor="rgb(253, 128, 93)" stopOpacity={0.05} />
             </linearGradient>
           </defs>
           <GridRows
