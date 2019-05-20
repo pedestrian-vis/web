@@ -31,13 +31,13 @@ class App extends Component {
           <span className={this.props.loading ? 'loading_icon1' : 'loading_icon1 fade'} />
         </div>
         <div className="left_graph">
-          <span className="title_area">Crossing Frequency<span className="current_flow">&nbsp;&nbsp;&nbsp;{this.props.flow_value} people/signal cycle</span></span>
+          <span className="title_area">Crossing Frequency in a Signal Cycle<span className="current_flow">&nbsp;&nbsp;&nbsp;{this.props.flow_value} pple./signal cycle</span></span>
           <div className="area_cross_time"><CrossingChart /></div>
           <span className="area_cross_anno annotation">Light turns green at 75s</span>
           <span className={this.props.loading ? 'loading_icon2' : 'loading_icon2 fade'} />
         </div>
         <div className="right_top_graph">
-          <span className="title_uti">Space Utilization<span className="current_flow">&nbsp;&nbsp;&nbsp;{this.props.flow_value} people/signal cycle</span></span>
+          <span className="title_uti">Space Utilization<span className="current_flow">&nbsp;&nbsp;&nbsp;{this.props.flow_value} pple./signal cycle</span></span>
           <div className="heatmap_container">
             <div className="heatmap_main"><HeatmapMain /></div>
             <div className="heatmap_buf"><HeatmapBuffer /></div>

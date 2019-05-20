@@ -193,7 +193,7 @@ class Simulation extends Component {
               </DeckGL>
               <div className={time > 900 && time < 1050 ? 'timer_acc' : 'timer_nom'}>
                 {displayTime}
-                <span className="second">s<span className="current_flow">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{this.props.flow_value} people/signal cycle</span></span>
+                <span className="second">s<span className="current_flow">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{this.props.flow_value} pple./signal cycle</span></span>
               </div>
               <div className="light_outline">
                 <span className={time < 1800 ? 'light_red_on' : 'light_red_off'} />

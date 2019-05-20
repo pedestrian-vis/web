@@ -232,20 +232,18 @@ class Area extends React.Component {
             scale={xScale}
             stroke="#bcbaba"
             tickStroke="#bcbaba"
-            label="Pedestrian Flow Rate (number of people/100s)"
+            label="Pedestrian Flow Rate (number of pple./100s)"
             labelProps={{
               fill: '#bcbaba',
               textAnchor: 'middle',
-              fontSize: 12,
-              fontFamily: 'Arial'
+              fontSize: 12
             }}
             tickStroke="#bcbaba"
             tickLength={7}
             tickLabelProps={(value, index) => ({
               fill: '#bcbaba',
               textAnchor: 'middle',
-              fontSize: 10,
-              fontFamily: 'Arial',
+              fontSize: 11,
               dx: '-0.25em',
               dy: '0.25em'
             })}
@@ -260,12 +258,11 @@ class Area extends React.Component {
             stroke="#bcbaba"
             tickStroke="#bcbaba"
             tickLength={6}
-            tickValues={[20,40,60,70,80,90]}
+            tickValues={[20,40,60,75,90]}
             tickLabelProps={(value, index) => ({
               fill: '#bcbaba',
               textAnchor: 'start',
-              fontSize: 10,
-              fontFamily: 'Arial',
+              fontSize: 11,
               dx: '0.25em',
               dy: '0.25em'
             })}
@@ -303,13 +300,13 @@ class Area extends React.Component {
           <div>
             <Tooltip
               top={tooltipTop - 36}
-              left={tooltipLeft - 64}
+              left={tooltipLeft - 110}
               style={{
                 backgroundColor: 'rgb(117, 95, 90)',
                 color: 'white'
               }}
             >
-              {`${y_st(tooltipData)}% run the light`}
+              {`${y_st(tooltipData)}% out of ${x_st(tooltipData)} pple. run the light`}
             </Tooltip>
             <Tooltip
               top={yMax}
@@ -318,7 +315,7 @@ class Area extends React.Component {
                 transform: 'translateX(-50%)'
               }}
             >
-              {`${x_st(tooltipData)} people/signal cycle`}
+              {`${x_st(tooltipData)} pple. in total`}
             </Tooltip>
           </div>
         )}

@@ -198,20 +198,18 @@ class Area extends React.Component {
             scale={xScale}
             stroke="#bcbaba"
             tickStroke="#bcbaba"
-            label="Time (sec.) within a Signal Cycle"
+            label="Time of Red & Green (sec.)"
             labelProps={{
               fill: '#bcbaba',
               textAnchor: 'middle',
-              fontSize: 12,
-              fontFamily: 'Arial'
+              fontSize: 12
             }}
             tickStroke="#bcbaba"
             tickLength={7}
             tickLabelProps={(value, index) => ({
               fill: '#bcbaba',
               textAnchor: 'middle',
-              fontSize: 10,
-              fontFamily: 'Arial',
+              fontSize: 11,
               dx: '-0.25em',
               dy: '0.25em'
             })}
