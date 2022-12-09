@@ -28,7 +28,7 @@
     "babel-polyfill": "^6.26.0",
     "d3-array": "^2.0.3",
     "deck.gl": "^6.3.6",
-    "express": "^4.16.3",
+    "express": "^4.17.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-map-gl": "^4.0.7",
